@@ -49,12 +49,26 @@ const FeedView = styled.div`
   display: block;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 100px);
   background: white;
+  overflow-y: auto;
+  overflow-x: hidden;
 `
+
+const PostFormView = styled.div`
+  display: inline-block;
+  position: absolute;
+  top: 100px;
+  right: 0;
+  width: 40%;
+  background: transparent;
+  text-align: center;
+`
+
 
 export {
   FeedControl,
   ToggleButton,
   FeedView,
+  PostFormView,
 }
