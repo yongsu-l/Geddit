@@ -49,6 +49,7 @@ const Form = styled.form`
 const FormField = styled.div`
   padding: 20px 20px 0 20px;
   width: calc(100% - 40px);
+  text-align: left;
 `
 
 const FormFieldLabel = Label.extend`
