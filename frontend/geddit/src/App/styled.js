@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 const AppView = styled.div`
-  position: relative;
   width: 100vw;
   height: 100vh;
+  position: relative;
   overflow: hidden;
+  transition: width .33s ease, height .33s ease;
 `
 
 const HeaderView = styled.div`
@@ -12,7 +13,6 @@ const HeaderView = styled.div`
   position: relative;
   width: 100%;
   height: 50px;
-  border-bottom: 1px solid #bbb;
   vertical-align: middle;
 `
 

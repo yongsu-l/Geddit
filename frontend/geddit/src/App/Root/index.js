@@ -4,9 +4,11 @@ import {
   FeedControl,
   ToggleButton,
   FeedView,
+  PostFormView,
 } from './styled';
 
 import Feed from './Feed';
+import PostForm from './PostForm';
 
 class Root extends Component {
   constructor() {
@@ -54,6 +56,7 @@ class Root extends Component {
 
     return (
       <Fragment>
+        
         <FeedControl>
           <ToggleButton { ...newToggleProps } >New</ToggleButton>
           <ToggleButton { ...topToggleProps } >Top</ToggleButton>
@@ -62,6 +65,11 @@ class Root extends Component {
         <FeedView>
           <Feed { ...feedProps } />
         </FeedView>
+
+        <PostFormView>
+          <PostForm />
+        </PostFormView>
+
       </Fragment>
     )
   }
@@ -75,6 +83,30 @@ const feedSample = [
   },
   {
     title: 'Some random Post Titles adfs d fsa f a f a s d flasdjflasdlfj asdlfjlasj flajsdklfjasldfasdfas asdfasdfa sfdas fas fa sdfas df asa sasd'
+  },
+  {
+    title: 'Some random Post Titles adfssad fas df sdaf sda fasd f dfasd'
+  },
+  {
+    title: 'Some random Post Titles adfsdfasd'
+  },
+  {
+    title: 'Some random Post Titles adfsdfasd'
+  },
+  {
+    title: 'Some random Post Titles adfsdfasd'
+  },
+  {
+    title: 'Some random Post Titles adfsdfasd'
+  },
+  {
+    title: 'Some random Post Titles adfsdfasd'
+  },
+  {
+    title: 'Some random Post Titles ad asd fsad f dsf asd fas f asdf asfsdfasd'
+  },
+  {
+    title: 'Some random Post Titles adfsdfasd'
   },
   {
     title: 'Some random Post Titles adfssad fas df sdaf sda fasd f dfasd'

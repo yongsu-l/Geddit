@@ -6,6 +6,9 @@ import SignupForm from './SignupForm';
 import {
   LogoLabel,
   ControlButton,
+  MenuButton,
+  FloatRightLabel,
+  UsernameLabel,
 } from './styled';
 
 class HeaderContent extends Component {
@@ -18,6 +21,8 @@ class HeaderContent extends Component {
 
     this.onToggle = this.onToggle.bind(this);
     this.setHeaderContentState = this.setHeaderContentState.bind(this);
+    this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this);
+    this.renderIfNotLoggedIn = this.renderIfNotLoggedIn.bind(this);
   }
 
   setHeaderContentState(state) {
@@ -36,22 +41,29 @@ class HeaderContent extends Component {
     }
   }
 
-  render() {
-    const {
-      toggled,
-    } = this.state; 
+  renderIfLoggedIn() {
+    const { user } = this.props;
+    return (
+      <Fragment>
+        <MenuButton>&equiv;</MenuButton>
+        <UsernameLabel>{ user.username }</UsernameLabel>        
+        <FloatRightLabel>Welcome!</FloatRightLabel>
+      </Fragment>
+    )
+  }
+
+  renderIfNotLoggedIn() {
+    const { toggled } = this.state;
 
     const controlButtonProps = {
       onClick: this.onToggle,
     }
-
     const formProps = {
       setHeaderContentState: this.setHeaderContentState,
     }
 
     return (
       <Fragment>
-        <LogoLabel>geddit</LogoLabel>
         <ControlButton { ...controlButtonProps } >Log In</ControlButton>
         <ControlButton { ...controlButtonProps } >Sign Up</ControlButton>
         {
@@ -60,6 +72,26 @@ class HeaderContent extends Component {
                 ? <LoginForm { ...formProps } />
                 : <SignupForm { ...formProps } />
             : null
+        }
+      </Fragment>
+    )
+  }
+
+  render() {
+    const {
+      renderIfLoggedIn,
+      renderIfNotLoggedIn
+    } = this;
+
+    const { user } = this.props;
+
+    return (
+      <Fragment>
+        <LogoLabel>geddit</LogoLabel>
+        {
+          (user)
+            ? renderIfLoggedIn()
+            : renderIfNotLoggedIn()
         }
       </Fragment>
     )

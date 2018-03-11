@@ -17,6 +17,12 @@ const CloseButton = Button.extend`
   float: right;
   margin: -16px 4px 0 0;
   border: 0;
+  font-size: 16px;
+
+  :hover {
+    background: transparent;
+    font-weight: 400;
+  }
 `
 
 export {

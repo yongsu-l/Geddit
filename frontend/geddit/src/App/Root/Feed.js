@@ -7,8 +7,9 @@ import {
 } from 'styled';
 
 const PostWrapper = styled.div`
-  width: calc(100% - 240px);
-  margin: 12px 0 0 6px;
+  display: inline-block;
+  width: calc(60% - 18px);
+  margin: 12px 6px;
   padding: 6px;
   border: 1px solid #bbb;
   `
@@ -28,9 +29,9 @@ const PostTitle = Label.extend`
 
 
 const Feed = ({ feed }) => {
-  const renderPost = (post) => {
+  const renderPost = (post, index) => {
     return (
-      <PostWrapper>
+      <PostWrapper key={index} >
         <PostTitle>{post.title}</PostTitle>
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>comment</div>
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>share</div>

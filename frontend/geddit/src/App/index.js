@@ -11,11 +11,27 @@ import {
 } from './styled';
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      user: null,
+    }
+  }
+
   render() {
+    const {
+      user,
+    } = this.state;
+
+    const headerProps = {
+      user,
+    }
+
     return (
       <AppView>
         <HeaderView>
-          <HeaderContent />
+          <HeaderContent { ...headerProps } />
         </HeaderView>
 
         <BodyView>
@@ -30,3 +46,7 @@ class App extends Component {
 }
 
 export default withRouter(App);
+
+const sampleUser = {
+  username: 'yaoc1996',
+}
