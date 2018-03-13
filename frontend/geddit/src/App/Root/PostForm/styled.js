@@ -7,9 +7,9 @@ import {
 
 const PostFormView = styled.div.attrs({
   style: ({ collapsed }) => ({
-    width: collapsed ? '70%' : 'calc(100% - 32px)',
+    width: collapsed ? 'calc(70% - 16px)' : 'calc(94% - 16px)',
     height: collapsed ? 32 : 'calc(50vh + 112px)',
-    marginLeft: collapsed ? '15%' : 6,
+    marginLeft: collapsed ? 'calc(12% + 8px)' : 8,
   })
 })`
   position: relative;

@@ -15,7 +15,7 @@ const PostWrapper = styled.div`
   `
   
 const PostTitle = Label.extend`
-  display: block;
+  display: inline-block;
   padding: 0;
   color: blue;
   font-size: 12px;
@@ -33,10 +33,12 @@ const Feed = ({ feed }) => {
     return (
       <PostWrapper key={index} >
         <PostTitle>{post.title}</PostTitle>
+        <div style={{ clear: 'both' }}>
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>comment</div>
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>share</div>
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>upvote</div>
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>report</div>
+        </div>
       </PostWrapper>
     )
   }

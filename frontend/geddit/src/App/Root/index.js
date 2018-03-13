@@ -10,44 +10,111 @@ import {
 import Feed from './Feed';
 import PostForm from './PostForm';
 
+import getFeed from 'lib/getFeed';
+import verifyQueryString from 'lib/verifyQueryString';
+import parseQueryString from 'lib/parseQueryString';
+
 class Root extends Component {
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
-      feedType: 'New',
+      type: null,
+      page: null,
       feed: feedSample,
     }
 
     this.onToggle = this.onToggle.bind(this);
+    this.loadFeed = this.loadFeed.bind(this);
+    this.onNextPage = this.onNextPage.bind(this);
+    this.onGoToPage = this.onGoToPage.bind(this);
+  }
+
+  componentDidMount() {
+    const { history } = this.props
+    
+    this.removeHistoryListener = history.listen(location => {
+      this.loadFeed(location.search);
+    })
+
+    this.loadFeed(history.location.search);
+  }
+
+  componentWillUnmount() {
+    this.removeHistoryListener();
+  }
+
+  loadFeed(queryString) {
+    const { history } = this.props;
+
+    if (verifyQueryString(queryString)) {
+      var { type, page } = parseQueryString(queryString);
+
+      type = type || 'New';
+      page = page || '1';
+
+      this.setState({
+        type,
+        page,
+      })
+      
+      getFeed({
+        type,
+        page,
+      })
+        .then(json => {
+          // set state feed
+        })
+
+    } else {
+      history.push(history.location.pathname);
+    }
   }
 
   onToggle(e) {
     const { textContent } = e.target,
-          { feedType } = this.state;
+          { type } = this.state,
+          { history } = this.props;
 
-    if (textContent !== feedType) {
+    if (textContent !== type) {
+      const { pathname } = history.location;
+      history.push(`${pathname}?type=${textContent}&page=1`);
+    }
+  }
 
-      this.setState({
-        feedType: textContent,
-      })
+  onNextPage() {
+    const { page, type } = this.state,
+          { history } = this.props;
+
+    const { pathname } = history.location;
+    history.push(`${pathname}?type=${type}&page=${parseInt(page, 10)+1}`);
+  }
+
+  onGoToPage(e) {
+    const { textContent } = e.target,
+          { type, page } = this.state,
+          { history } = this.props;
+
+    if (textContent !== page) {
+      const { pathname } = history.location;
+      history.push(`${pathname}?type=${type}&page=${textContent}`);
     }
   }
 
   render() {
     const {
-      feedType,
+      type,
       feed
     } = this.state;
 
     const newToggleProps = {
       onClick: this.onToggle,
-      toggled: feedType === 'New',
+      toggled: type === 'New',
     }
 
     const topToggleProps = {
       onClick: this.onToggle,
-      toggled: feedType === 'Top',
+      toggled: type === 'Top',
     }
 
     const feedProps = {

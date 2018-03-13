@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import headerBG from 'static/headerBG.jpg';
+import headerBG from 'static/root-header-bg.jpg';
 
 import {
   Button,

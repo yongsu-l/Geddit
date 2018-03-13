@@ -11,7 +11,7 @@ import {
   CancelButton,
 } from './styled';
 
-import createPost from 'lib/createPost';
+import postDiscussion from 'lib/postDiscussion';
 
 class PostForm extends Component {
   constructor() {
@@ -22,7 +22,7 @@ class PostForm extends Component {
     }
 
     this.onToggle = this.onToggle.bind(this);
-    this.onCreatePost = this.onCreatePost.bind(this);
+    this.onPostDiscussion = this.onPostDiscussion.bind(this);
   }
 
   onToggle() {
@@ -31,13 +31,13 @@ class PostForm extends Component {
     })
   }
 
-  onCreatePost(e) {
+  onPostDiscussion(e) {
     e.preventDefault();
 
     const title = e.target.title.value;
     const content = e.target.content.value;
 
-    createPost({
+    postDiscussion({
       title,
       content,
     })
@@ -60,7 +60,7 @@ class PostForm extends Component {
     }
 
     const discussionFormProps = {
-      onSubmit: this.onCreatePost,
+      onSubmit: this.onPostDiscussion,
     }
 
     const titleInputProps = {
