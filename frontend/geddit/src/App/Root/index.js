@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from 'react';
 
 import {
-  FeedControl,
-  ToggleButton,
+  FeedControlView,
   FeedView,
   PostFormView,
+  PageNavigationView,
 } from './styled';
 
+import FeedControl from './FeedControl';
 import Feed from './Feed';
+import PageNavigation from './PageNavigation';
 import PostForm from './PostForm';
 
 import getFeed from 'lib/getFeed';
@@ -19,8 +21,9 @@ class Root extends Component {
     super();
 
     this.state = {
-      type: null,
-      page: null,
+      type: 'New',
+      page: '1',
+      numPage: 16,
       feed: feedSample,
     }
 
@@ -83,11 +86,18 @@ class Root extends Component {
   }
 
   onNextPage() {
-    const { page, type } = this.state,
-          { history } = this.props;
+    const { 
+      page, 
+      type,
+      numPage,
+    } = this.state;
 
-    const { pathname } = history.location;
-    history.push(`${pathname}?type=${type}&page=${parseInt(page, 10)+1}`);
+    if (parseInt(page, 10) < parseInt(numPage, 10)) {
+      const { history } = this.props;
+      const { pathname } = history.location;
+      
+      history.push(`${pathname}?type=${type}&page=${parseInt(page, 10)+1}`);
+    }
   }
 
   onGoToPage(e) {
@@ -103,35 +113,46 @@ class Root extends Component {
 
   render() {
     const {
+      onToggle,
+      onNextPage,
+      onGoToPage,
+    } = this;
+
+    const {
+      feed,
       type,
-      feed
+      page,
+      numPage,
     } = this.state;
 
-    const newToggleProps = {
-      onClick: this.onToggle,
-      toggled: type === 'New',
+    const feedControlProps = {
+      onToggle,
+      type,
     }
 
-    const topToggleProps = {
-      onClick: this.onToggle,
-      toggled: type === 'Top',
-    }
+    const feedProps = { feed }
 
-    const feedProps = {
-      feed,
+    const pageNavigationProps = {
+      page,
+      numPage,
+      onNextPage,
+      onGoToPage,
     }
 
     return (
       <Fragment>
         
-        <FeedControl>
-          <ToggleButton { ...newToggleProps } >New</ToggleButton>
-          <ToggleButton { ...topToggleProps } >Top</ToggleButton>
-        </FeedControl>
+        <FeedControlView>
+          <FeedControl { ...feedControlProps } />
+        </FeedControlView>
 
         <FeedView>
           <Feed { ...feedProps } />
         </FeedView>
+
+        <PageNavigationView>
+          <PageNavigation { ...pageNavigationProps } />
+        </PageNavigationView>
 
         <PostFormView>
           <PostForm />
