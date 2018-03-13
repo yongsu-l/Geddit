@@ -1,11 +1,10 @@
 // users/user.js
 
-const db = require('../db');
+const db = require('../config/db');
 
 db.connect();
 
 exports.createUser = function(user, done) {
-
   db.get().query('INSERT INTO users SET ?', [user], (err, result) => {
     if (err) throw err;
     const newUser = {
@@ -25,6 +24,15 @@ exports.getUser = function(username, done) {
   });
 }
 
+exports.getUserByID = function(userID, done) {
+  //console.log(userID);
+  db.get().query('SELECT * FROM users WHERE userID = ? LIMIT 1', [userID], (err, rows, fields) => {
+    if (err) throw err;
+    //console.log(rows);
+    done(rows[0]);
+  });
+}
+
 exports.emailExists = function(email, done) {
   db.get().query('SELECT * FROM users WHERE email = ? LIMIT 1', [email], (err, rows, fields) => {
     if (err) throw err;
@@ -38,3 +46,4 @@ exports.usernameExists = function(username, done) {
     done(rows.length > 0);
   })
 }
+
