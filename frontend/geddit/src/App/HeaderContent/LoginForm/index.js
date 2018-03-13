@@ -12,7 +12,7 @@ import {
   CloseButton,
 } from './styled';
 
-import login from 'lib/login';
+import postLogin from 'lib/postLogin';
 
 class LoginForm extends Component {
   constructor() {
@@ -33,7 +33,7 @@ class LoginForm extends Component {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    login(email, password)
+    postLogin(email, password)
       .then(json => {
         //store token and update state
         console.log(json);

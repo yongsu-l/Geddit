@@ -12,7 +12,7 @@ import {
   CloseButton,
 } from './styled';
 
-import signup from 'lib/signup';
+import postSignup from 'lib/postSignup';
 
 class SignupForm extends Component {
   constructor() {
@@ -36,14 +36,14 @@ class SignupForm extends Component {
           password = e.target.password.value,
           confirm = e.target.confirm.value;
 
-    signup({
+    postSignup({
       username,
       email,
       password,
       confirm,
     })
       .then(json => {
-        // after signup
+        // after postSignup
         console.log(json);
       })
     
