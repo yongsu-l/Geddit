@@ -5,11 +5,13 @@ import {
 
 const LogoLabel = Label.extend`
   line-height: 50px;
+  background: #f7f7f7;
 `
 
 const ControlButton = Button.extend`
   float: right;
   margin: 10px 10px 10px 0;
+  background: #f7f7f7;  
 `
 
 const FloatRightLabel = LogoLabel.extend`

@@ -23,9 +23,13 @@ class SignupForm extends Component {
   }
 
   onClose() {
-    this.props.setHeaderContentState({
-      toggled: null,
-    })
+    const {
+      setHeaderContentState,
+      setAppState,
+    } = this.props;
+
+    setHeaderContentState({ toggled: null });
+    setAppState({ disabledBody: false });
   }
 
   onSignup(e) {
