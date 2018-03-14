@@ -34,10 +34,13 @@ class LoginForm extends Component {
 
   onLogin(e) {
     e.preventDefault();
-    const email = e.target.email.value;
+    const username = e.target.username.value;
     const password = e.target.password.value;
-
-    postLogin(email, password)
+    
+    postLogin({
+      username, 
+      password,
+    })
       .then(json => {
         //store token and update state
         console.log(json);
@@ -50,9 +53,9 @@ class LoginForm extends Component {
       onClick: this.onClose,
     }
 
-    const emailInputProps = {
+    const usernameInputProps = {
       type: 'text',
-      name: 'email',
+      name: 'username',
       required: true,
     }
 
@@ -70,8 +73,8 @@ class LoginForm extends Component {
       <LoginFormView { ...formProps } >
         <CloseButton { ...closeButtonProps } >x</CloseButton>
         <FormField>
-          <FormFieldLabel >Email</FormFieldLabel>
-          <FormFieldInput { ...emailInputProps } />
+          <FormFieldLabel >Username</FormFieldLabel>
+          <FormFieldInput { ...usernameInputProps } />
         </FormField>
         <FormField>
           <FormFieldLabel >Password</FormFieldLabel>
