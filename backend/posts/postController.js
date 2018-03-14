@@ -15,8 +15,10 @@ const query = require('./post');
 
 //More routes
 const comment = require('./comments');
+const vote    = require('./votes');
 
 router.use('/comment', comment['router']);
+router.use('/vote', vote['router']);
 
 router.get('/', (req, res) => {
   if (!req.query.postID) res.status(400).json({success: false, msg: 'No postID query specified'});

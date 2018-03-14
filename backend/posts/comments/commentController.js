@@ -15,7 +15,7 @@ const query = require('./comment');
 
 router.put('/', verifyToken, (req, res) => {
   if (!req.body.content || !req.body.postID)
-    res.status(400).json({success: false, msg: 'Must provide content and postID'});
+    res.status(400).json({success: false, msg: 'Must provide comment and postID'});
   query.makeComment({
     userID: req.userID,
     postID: req.body.postID,
