@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS comments (
 CREATE TABLE IF NOT EXISTS postVotes (
   postID int NOT NULL,
   userID int NOT NULL,
+  upvote boolean NOT NULL,
   Foreign Key (postID) REFERENCES posts(postID),
   Foreign Key (userID) REFERENCES users(userID)
 );
@@ -44,6 +45,7 @@ CREATE TABLE IF NOT EXISTS postVotes (
 CREATE TABLE IF NOT EXISTS commentVotes (
   commentID int NOT NULL,
   userID int NOT NULL,
+  upvote boolean NOT NULL,
   Foreign Key (commentID) REFERENCES comments(commentID),
   Foreign Key (userID) REFERENCES users(userID)
 );
