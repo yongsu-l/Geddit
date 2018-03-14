@@ -13,8 +13,19 @@ function parseComment(data) {
 
     idToNodeMap[datum.commentID] = datum;
 
+    if (datum.parentID === null) {
+      root.push(datum);
+      delete datum.parentID;
+    }
+    else {
+      parentNode = idToNodeMap[datum.parentID];
+      if (datum.parentID !== null)
+        parentNode.comments.push(datum);
+      delete datum.parentID;
+    }
+  });
 
-  })
+  return root;
 }
 
 module.exports = {
@@ -26,18 +37,10 @@ module.exports = {
         //Add the comments to the post before return
         post = post_rows[0];
         //Iterate through the list to get the child comments into the parent comments
-        comments = {}
-        post_comments = []
-        if (comment_rows.length !== 0)
-          for (i = 0; i < comment_rows.length; i++) {
-            comments[comment_rows[i].commentID] = comment_rows[i];
-          };
-        for (i = 0; i < comment_rows.length; i++) {
-          if (comment_rows[i].parentID === null)
-            post_comments.append(comment_rows[i]);
-        }
+        const comments = parseComment(comment_rows);
         //Query to get the upvotes
-        done(post.comments = post_comments);
+        post['comments'] = comments;
+        done(post);
       });
     });
   }
