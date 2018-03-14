@@ -36,7 +36,7 @@ const PageNavigationView = styled.div`
   position: relative;
   width: 100%;
   height: 50px;
-  text-align: center;
+  text-align: left;
   background: #eee;
 `
 

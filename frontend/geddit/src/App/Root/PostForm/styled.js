@@ -36,6 +36,8 @@ const PostFormView = styled.div.attrs({
 `
 
 const PostButton = Button.extend`
+  font-family: sans-serif;
+  font-size: 14px;
   position: relative;
   width: 100%;
   height: 32px;
@@ -55,6 +57,7 @@ const FormTitle = styled.div`
   width: 100%;
   height: 32px;
   line-height: 32px;
+  color: #333;
   font-size: 14px;
   border-bottom: 1px solid #bbb;
 `

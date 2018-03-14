@@ -6,14 +6,20 @@ import {
 } from 'styled';
 
 const PageButton = Button.extend`
+  position: relative;
   width: 30px;
   height: 30px;
   margin: 10px 0 0 10px;
   padding: 0;
   border: 0;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 `
 
 const SelectedPageButton = PageButton.extend`
+  marginLeft: calc(50vw - 15px);
   color: white;
   background: #333;
 
@@ -37,6 +43,8 @@ const SelectedPageButton = PageButton.extend`
 `
 
 const NextButton = PageButton.extend`
+  position: absolute;
+  left: 320px;
   width: auto;
   padding: 0 6px;
 `
@@ -49,7 +57,7 @@ const PageNavigation = props => {
     onNextPage,
   } = props;
 
-  const pageButtonProps = (page) => ({
+  const pageButtonProps = page => ({
     onClick: onGoToPage,
     key: page,
   })
@@ -60,11 +68,15 @@ const PageNavigation = props => {
 
   const renderPageButtons = () => {
     const currentPage = parseInt(page, 10);
-    var lowerBound = currentPage - 5;
-    var upperBound = currentPage + 4;
-
+    var lowerBound = currentPage - 4;
     lowerBound = lowerBound >= 1 ? lowerBound : 1;
-    upperBound = upperBound <= numPage ? upperBound : numPage;
+    
+    var upperBound = lowerBound + 7;
+
+    if (upperBound > numPage) {
+      upperBound = numPage;
+      lowerBound = upperBound - 7;
+    }
 
     const pageIndices = _.range(lowerBound, upperBound+1);
 
