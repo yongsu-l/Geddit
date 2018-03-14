@@ -53,8 +53,8 @@ class App extends Component {
             disabledBody && <Mask />
           }
           <Switch>
-            <Route exact path='/' component={Root} />
             <Route exact path='/post' component={Post} />
+            <Route path='/' component={Root} />
           </Switch>
         </BodyView>
 
