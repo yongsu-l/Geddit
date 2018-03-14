@@ -45,11 +45,12 @@ router.post('/create', (req, res) => {
             password: req.body.password,
             email: req.body.email
           }, (newUser) => {
-            createToken(newUser);
+            let token = createToken(newUser);
             res.status(201).json({
               success: true,
               msg: "User successfully created",
-              username: newUser.username
+              username: newUser.username,
+              id_token: token
             });
           });
         }
@@ -76,11 +77,13 @@ router.post('/login', (req, res) => {
         msg: "Username and Password do not match"
       });
     }
-    else 
+    else {
       res.status(201).json({
         success: true,
-        id_token: createToken(user)
+        username : user.username,
+        id_token: createToken(user),
       });
+    }
   });
 });
 
