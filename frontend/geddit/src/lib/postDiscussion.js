@@ -1,4 +1,4 @@
-function createPost(body) {
+function postDiscussion(body) {
   return (
     fetch('/user/post/create', {
       method: 'PUT',
@@ -12,4 +12,4 @@ function createPost(body) {
   )
 }
 
-export default createPost;
+export default postDiscussion;
