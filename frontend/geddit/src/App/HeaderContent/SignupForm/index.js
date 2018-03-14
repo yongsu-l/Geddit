@@ -12,7 +12,7 @@ import {
   CloseButton,
 } from './styled';
 
-import signup from 'lib/signup';
+import postSignup from 'lib/postSignup';
 
 class SignupForm extends Component {
   constructor() {
@@ -23,33 +23,44 @@ class SignupForm extends Component {
   }
 
   onClose() {
-    this.props.setHeaderContentState({
-      toggled: null,
-    })
+    const {
+      setHeaderContentState,
+      setAppState,
+    } = this.props;
+
+    setHeaderContentState({ toggled: null });
+    setAppState({ disabledBody: false });
   }
 
   onSignup(e) {
     e.preventDefault();
+
+    const { setAppState } = this.props;
 
     const username = e.target.username.value,
           email = e.target.email.value,
           password = e.target.password.value,
           confirm = e.target.confirm.value;
 
-    signup({
-      username,
-      email,
-      password,
-      confirm,
-    })
-      .then(json => {
-        // after signup
-        console.log(json);
+    if (password === confirm) {
+      postSignup({
+        username,
+        email,
+        password,
       })
+        .then(json => {
+          console.log(json);
+          this.onClose();
+        })
+    }
     
   }
 
   render() {
+    const signupFormProps = {
+      onSubmit: this.onSignup,
+    }
+
     const closeButtonProps = {
       type: 'button',
       onClick: this.onClose,
@@ -79,7 +90,7 @@ class SignupForm extends Component {
     }
 
     return (
-      <SignupFormView>
+      <SignupFormView { ...signupFormProps } >
         <CloseButton { ...closeButtonProps } >x</CloseButton>
         <FormField>
           <FormFieldLabel >Username</FormFieldLabel>

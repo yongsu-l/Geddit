@@ -7,9 +7,9 @@ import {
 
 const PostFormView = styled.div.attrs({
   style: ({ collapsed }) => ({
-    width: collapsed ? '70%' : 'calc(100% - 32px)',
+    width: collapsed ? 'calc(70% - 16px)' : 'calc(94% - 16px)',
     height: collapsed ? 32 : 'calc(50vh + 112px)',
-    marginLeft: collapsed ? '15%' : 6,
+    marginLeft: collapsed ? 'calc(12% + 8px)' : 8,
   })
 })`
   position: relative;
@@ -36,6 +36,8 @@ const PostFormView = styled.div.attrs({
 `
 
 const PostButton = Button.extend`
+  font-family: sans-serif;
+  font-size: 14px;
   position: relative;
   width: 100%;
   height: 32px;
@@ -55,6 +57,7 @@ const FormTitle = styled.div`
   width: 100%;
   height: 32px;
   line-height: 32px;
+  color: #333;
   font-size: 14px;
   border-bottom: 1px solid #bbb;
 `

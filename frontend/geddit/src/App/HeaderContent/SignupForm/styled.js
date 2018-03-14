@@ -10,7 +10,7 @@ const SignupFormView = Form.extend`
   right: 10px;
   width: 264px;
   background: white;
-  opacity: 0.96;
+  border-top: 0;
 `
 
 const CloseButton = Button.extend`

@@ -14,6 +14,7 @@ const HeaderView = styled.div`
   width: 100%;
   height: 50px;
   vertical-align: middle;
+  background: #f7f7f7;
 `
 
 const BodyView = styled.div`
@@ -24,8 +25,21 @@ const BodyView = styled.div`
   text-align: left;
 `
 
+const Mask = styled.div`
+  z-index: 99;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  -webkit-animation: fade-in .3s ease;
+  -moz-animation: fade-in .3s ease;
+  -o-animation: fade-in .3s ease;
+  animation: fade-in .3s ease;
+`
+
 export {
   AppView,
   HeaderView,
   BodyView,
+  Mask,
 }

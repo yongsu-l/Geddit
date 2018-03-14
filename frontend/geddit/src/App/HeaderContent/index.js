@@ -30,14 +30,28 @@ class HeaderContent extends Component {
   }
 
   onToggle(e) {
+    const {
+      setAppState,
+    } = this.props;
+
     if (this.state.toggled === e.target.textContent) {
-      this.setState({
-        toggled: null,
-      })
+      this.setState({ toggled: null });
+      setAppState({ disabledBody: false });
+
     } else {
-      this.setState({
-        toggled: e.target.textContent,
-      })
+      this.setState({ toggled: e.target.textContent });
+      setAppState({ disabledBody: true });
+
+      const bodyView = document.getElementById('body-view');
+      bodyView.addEventListener(
+        'click', 
+        () => {
+          this.setState({ toggled: null });
+          setAppState({ disabledBody: false });
+        },
+        { once: true }
+      );
+
     }
   }
 
@@ -53,13 +67,16 @@ class HeaderContent extends Component {
   }
 
   renderIfNotLoggedIn() {
-    const { toggled } = this.state;
+    const { setHeaderContentState } = this,
+          { setAppState } = this.props,
+          { toggled } = this.state;
 
     const controlButtonProps = {
       onClick: this.onToggle,
     }
     const formProps = {
-      setHeaderContentState: this.setHeaderContentState,
+      setHeaderContentState,
+      setAppState,
     }
 
     return (
