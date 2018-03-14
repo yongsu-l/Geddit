@@ -3,6 +3,7 @@ import { Switch, withRouter, Route } from 'react-router-dom';
 
 import HeaderContent from './HeaderContent';
 import Root from './Root';
+import Post from './Post';
 
 import {
   AppView,
@@ -16,7 +17,7 @@ class App extends Component {
     super();
 
     this.state = {
-      user: null,
+      username: null,
       disabledBody: false,
     }
 
@@ -32,12 +33,12 @@ class App extends Component {
       setAppState,
     } = this;
     const {
-      user,
+      username,
       disabledBody,
     } = this.state;
 
     const headerProps = {
-      user,
+      username,
       setAppState,
     }
 
@@ -52,7 +53,8 @@ class App extends Component {
             disabledBody && <Mask />
           }
           <Switch>
-            <Route exact to='/' component={Root} />
+            <Route exact path='/' component={Root} />
+            <Route exact path='/post' component={Post} />
           </Switch>
         </BodyView>
 

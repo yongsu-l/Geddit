@@ -23,6 +23,7 @@ const BodyView = styled.div`
   width: 100%;
   height: calc(100% - 50px);
   text-align: left;
+  overflow-y: auto;
 `
 
 const Mask = styled.div`
