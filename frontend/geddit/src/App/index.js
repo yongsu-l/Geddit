@@ -8,6 +8,7 @@ import {
   AppView,
   HeaderView,
   BodyView,
+  Mask,
 } from './styled';
 
 class App extends Component {
@@ -16,25 +17,40 @@ class App extends Component {
 
     this.state = {
       user: null,
+      disabledBody: false,
     }
+
+    this.setAppState = this.setAppState.bind(this);
+  }
+
+  setAppState(state) {
+    this.setState(state);
   }
 
   render() {
     const {
+      setAppState,
+    } = this;
+    const {
       user,
+      disabledBody,
     } = this.state;
 
     const headerProps = {
       user,
+      setAppState,
     }
 
     return (
-      <AppView>
-        <HeaderView>
+      <AppView id='app-view' >
+        <HeaderView id='header-view'>
           <HeaderContent { ...headerProps } />
         </HeaderView>
-
-        <BodyView>
+        
+        <BodyView id='body-view'>
+          {
+            disabledBody && <Mask />
+          }
           <Switch>
             <Route exact to='/' component={Root} />
           </Switch>

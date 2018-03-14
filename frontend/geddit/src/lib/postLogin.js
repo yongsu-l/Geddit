@@ -1,9 +1,9 @@
-function login(body) {
+function postLogin(body) {
   return (
     fetch('/user/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'applicaton/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     })
@@ -12,4 +12,4 @@ function login(body) {
   )
 }
 
-export default login;
+export default postLogin;

@@ -1,4 +1,4 @@
-function signup(body) {
+function postSignup(body) {
   return (
     fetch('/user/create', {
       method: 'POST',
@@ -12,4 +12,4 @@ function signup(body) {
   )
 }
 
-export default signup;
+export default postSignup;

@@ -12,7 +12,7 @@ import {
   CloseButton,
 } from './styled';
 
-import login from 'lib/login';
+import postLogin from 'lib/postLogin';
 
 class LoginForm extends Component {
   constructor() {
@@ -23,17 +23,24 @@ class LoginForm extends Component {
   }
 
   onClose() {
-    this.props.setHeaderContentState({
-      toggled: null,
-    })
+    const {
+      setHeaderContentState,
+      setAppState,
+    } = this.props;
+
+    setHeaderContentState({ toggled: null });
+    setAppState({ disabledBody: false });
   }
 
   onLogin(e) {
     e.preventDefault();
-    const email = e.target.email.value;
+    const username = e.target.username.value;
     const password = e.target.password.value;
-
-    login(email, password)
+    
+    postLogin({
+      username, 
+      password,
+    })
       .then(json => {
         //store token and update state
         console.log(json);
@@ -46,9 +53,9 @@ class LoginForm extends Component {
       onClick: this.onClose,
     }
 
-    const emailInputProps = {
+    const usernameInputProps = {
       type: 'text',
-      name: 'email',
+      name: 'username',
       required: true,
     }
 
@@ -66,8 +73,8 @@ class LoginForm extends Component {
       <LoginFormView { ...formProps } >
         <CloseButton { ...closeButtonProps } >x</CloseButton>
         <FormField>
-          <FormFieldLabel >Email</FormFieldLabel>
-          <FormFieldInput { ...emailInputProps } />
+          <FormFieldLabel >Username</FormFieldLabel>
+          <FormFieldInput { ...usernameInputProps } />
         </FormField>
         <FormField>
           <FormFieldLabel >Password</FormFieldLabel>
