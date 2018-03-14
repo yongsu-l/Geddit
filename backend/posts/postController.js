@@ -13,11 +13,16 @@ router.use(bodyParser.json());
 
 const query = require('./post');
 
+//More routes
+const comment = require('./comments');
+
+router.use('/comment', comment['router']);
+
 router.get('/', (req, res) => {
   if (!req.query.postID) res.status(400).json({success: false, msg: 'No postID query specified'});
-  query.getPostByID(req.query.postID, (posts) => {
-    if (!posts) res.status(404).json({success: false, msg: 'No post found'});
-    res.status(200).json({success: true, posts});
+  query.getPostByID(req.query.postID, (post) => {
+    if (!post) res.status(404).json({success: false, msg: 'No post found'});
+    res.status(200).json({success: true, post});
   })
 });
 

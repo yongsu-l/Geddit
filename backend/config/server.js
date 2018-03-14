@@ -13,11 +13,11 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => res.send('Welcome to Geddit REST API'));
 
 //API Routes 
-var user = require('../users');
-//var post = require('./posts');
+const user = require('../users');
+const post = require('../posts');
 
-app.use('/user', user);
-//app.use('/post', post);
+app.use('/user', user['router']);
+app.use('/post', post['router']);
 
 app.listen(CONFIG.port, () => {
   console.log("Server is up and running on port ".green + CONFIG.port.yellow);

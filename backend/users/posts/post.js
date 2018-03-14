@@ -13,6 +13,7 @@ module.exports = {
   },
 
   createPost: (post, done) => {
+    console.log(post);
     db.get().query('INSERT INTO posts SET ?', [post], (err, result) => {
       if (err) throw err;
       const newPost = {

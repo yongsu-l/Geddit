@@ -46,7 +46,7 @@ router.post('/create', (req, res) => {
             email: req.body.email
           }, (newUser) => {
             createToken(newUser);
-            res.status(200).json({
+            res.status(201).json({
               sucess: true,
               msg: "User successfully created"
             });

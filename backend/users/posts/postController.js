@@ -21,7 +21,6 @@ router.get('/', verifyToken, (req, res) => {
 })
 
 router.post('/create', verifyToken, (req, res) => {
-  console.log(req)
   if (!req.body.title || !req.body.content)
     return res.status(400).json({success: false, msg: 'Must send title and content'});
   query.createPost({

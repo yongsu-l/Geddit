@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS posts (
   postID int NOT NULL AUTO_INCREMENT, 
   userID int NOT NULL,
   title TinyText NOT NULL,
-  body MediumText NOT NULL,
+  content MediumText NOT NULL,
   dateCreated datetime DEFAULT NOW(),
   lastUpdated datetime DEFAULT NOW() ON UPDATE NOW(),
   Primary Key (postID),
@@ -25,12 +25,13 @@ CREATE TABLE IF NOT EXISTS comments (
   postID int NOT NULL,
   userID int NOT NULL,
   parentID int DEFAULT NULL,
-  body Text NOT NULL,
+  content Text NOT NULL,
   dateCreated datetime DEFAULT NOW(),
   lastUpdated datetime DEFAULT NOW() ON UPDATE NOW(),
   Primary Key (commentID),
   Foreign Key (postID) REFERENCES posts(postID),
-  Foreign Key (userID) REFERENCES users(userID)
+  Foreign Key (userID) REFERENCES users(userID),
+  Foreign Key (parentID) REFERENCES comments(commentID)
 );
 
 CREATE TABLE IF NOT EXISTS postVotes (
