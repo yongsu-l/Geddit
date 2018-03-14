@@ -19,6 +19,7 @@ router.put('/', verifyToken, (req, res) => {
   query.makeComment({
     userID: req.userID,
     postID: req.body.postID,
+    parentID: req.body.parentID,
     content: req.body.content
   }, (newComment) => {
     if (!newComment) res.status(400).json({success: false, msg : 'Failed to make comment'});
