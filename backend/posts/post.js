@@ -4,6 +4,30 @@ const db = require('../config/db');
 
 db.connect();
 
+function parseComment(data) {
+  var idToNodeMap = {};
+  var root = [];
+
+  data.forEach((datum) => {
+    datum.comments = [];
+
+    idToNodeMap[datum.commentID] = datum;
+
+    if (datum.parentID === null) {
+      root.push(datum);
+      delete datum.parentID;
+    }
+    else {
+      parentNode = idToNodeMap[datum.parentID];
+      if (datum.parentID !== null)
+        parentNode.comments.push(datum);
+      delete datum.parentID;
+    }
+  });
+
+  return root;
+}
+
 module.exports = {
   getPostByID : (postID, done) => {
     db.get().query('SELECT * FROM posts WHERE postID = ? LIMIT 1', [postID], (err, post_rows, fields) => {
@@ -12,8 +36,10 @@ module.exports = {
       db.get().query('SELECT * FROM comments where postID = ?', [postID], (err, comment_rows, fields) => {
         //Add the comments to the post before return
         post = post_rows[0];
-        post.comments = comment_rows;
+        //Iterate through the list to get the child comments into the parent comments
+        const comments = parseComment(comment_rows);
         //Query to get the upvotes
+        post['comments'] = comments;
         done(post);
       });
     });
