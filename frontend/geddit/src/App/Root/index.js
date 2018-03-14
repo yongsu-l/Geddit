@@ -56,19 +56,20 @@ class Root extends Component {
       type = type || 'New';
       page = page || '1';
 
-      this.setState({
-        type,
-        page,
-      })
-      
-      getFeed({
-        type,
-        page,
-      })
-        .then(json => {
-          // set state feed
+      if (type !== this.state.type || page !== this.state.page) {
+        this.setState({
+          type,
+          page,
         })
-
+        
+        getFeed({
+          type,
+          page,
+        })
+          .then(json => {
+            // set state feed
+          })
+      }
     } else {
       history.push(history.location.pathname);
     }
