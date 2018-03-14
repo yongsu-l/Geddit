@@ -76,11 +76,13 @@ router.post('/login', (req, res) => {
         msg: "Username and Password do not match"
       });
     }
-    else 
+    else {
       res.status(201).json({
         success: true,
-        id_token: createToken(user)
+        username : user.username,
+        id_token: createToken(user),
       });
+    }
   });
 });
 
