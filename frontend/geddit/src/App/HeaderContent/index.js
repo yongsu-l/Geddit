@@ -56,11 +56,11 @@ class HeaderContent extends Component {
   }
 
   renderIfLoggedIn() {
-    const { user } = this.props;
+    const { username } = this.props;
     return (
       <Fragment>
         <MenuButton>&equiv;</MenuButton>
-        <UsernameLabel>{ user.username }</UsernameLabel>        
+        <UsernameLabel>{ username }</UsernameLabel>        
         <FloatRightLabel>Welcome!</FloatRightLabel>
       </Fragment>
     )
@@ -100,13 +100,13 @@ class HeaderContent extends Component {
       renderIfNotLoggedIn
     } = this;
 
-    const { user } = this.props;
+    const { username } = this.props;
 
     return (
       <Fragment>
         <LogoLabel>geddit</LogoLabel>
         {
-          (user)
+          username
             ? renderIfLoggedIn()
             : renderIfNotLoggedIn()
         }

@@ -42,7 +42,14 @@ class LoginForm extends Component {
       password,
     })
       .then(json => {
-        //store token and update state
+        if (json.success) {
+          window.localStorage.setItem('token', json.id_token);
+          this.props.setAppState({
+            username: json.username,
+          })
+        } else {
+          console.log(json.msg);
+        }
         console.log(json);
       })
   }
