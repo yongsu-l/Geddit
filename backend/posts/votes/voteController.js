@@ -21,7 +21,7 @@ router.put('/', verifyToken, (req, res) => {
     upvote: req.body.upvote
   }, (vote) => {
     if (!vote) res.status(400).json({success: false, msg : 'Failed to vote'});
-    res.status(201).json({success: true, msg: 'Vote placed'});
+    else res.status(201).json({success: true, msg: 'Vote placed'});
   })
 })
 

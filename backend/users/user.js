@@ -9,14 +9,11 @@ module.exports = {
   createUser : (user, done) => {
     db.get().query('INSERT INTO users SET ?', [user], (err, result) => {
       if (err) throw err;
-      const newUser = {
-        userID: result.userID,
-        username: result.username,
-        password: result.password,
-        email: result.email
-      };
-      done(newUser);
-    })
+      db.get().query('SELECT * FROM users WHERE username = ? LIMIT 1', [user.username], (err, rows, fields) => {
+        if (err) throw err;
+        done(rows[0]);
+      })
+    });
   },
 
   getUser : (username, done) => {

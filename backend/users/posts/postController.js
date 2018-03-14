@@ -16,7 +16,7 @@ const query = require('./post.js');
 router.get('/', verifyToken, (req, res) => {
   query.getPosts(req.userID, (posts) => {
     if (!posts) return res.status(404).json({success: false, msg: 'No posts found'});
-    res.status(200).json({success: true, posts});
+    else res.status(200).json({success: true, posts});
   })
 })
 
@@ -29,7 +29,7 @@ router.post('/create', verifyToken, (req, res) => {
     content: req.body.content
   }, (newPost) => {
     if (!newPost) res.status(400).json({success: false, msg: 'Post creation failed'});
-    res.status(200).json({success:true, msg: 'Post successfully created'});
+    else res.status(200).json({success:true, msg: 'Post successfully created'});
   });
 });
 

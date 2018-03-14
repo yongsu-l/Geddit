@@ -25,17 +25,17 @@ function createToken(user) {
 
 router.post('/create', (req, res) => {
   if (!req.body.username || !req.body.password)
-    return res.status(400).send("You must send username and password");
+    res.status(400).send("You must send username and password");
   query.emailExists(req.body.email, (emailCheck) => {
     if(emailCheck)
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         msg: "A user with that email already exists"
       });
     else {
       query.usernameExists(req.body.username, (usernameCheck) => {
         if(usernameCheck)
-          return res.status(400).json({
+          res.status(400).json({
             success: false,
             msg: "A user with that username already exists"
           });
@@ -47,8 +47,9 @@ router.post('/create', (req, res) => {
           }, (newUser) => {
             createToken(newUser);
             res.status(201).json({
-              sucess: true,
-              msg: "User successfully created"
+              success: true,
+              msg: "User successfully created",
+              username: newUser.username
             });
           });
         }
@@ -59,33 +60,34 @@ router.post('/create', (req, res) => {
 
 router.post('/login', (req, res) => {
   if (!req.body.username || !req.body.password)
-    return res.status(400).json({
+    res.status(400).json({
       success: false,
       msg: "You must pass both username and password"
     });
   query.getUser(req.body.username, (user) => {
     if (!user)
-      return res.status(401).json({
+      res.status(401).json({
         success: false,
         msg: "Username does not exist"
       });
     if (user.password !== req.body.password) {
-      return res.status(401).json({
+      res.status(401).json({
         success: false,
         msg: "Username and Password do not match"
       });
     }
-    res.status(201).json({
-      success: true,
-      id_token: createToken(user)
-    });
+    else 
+      res.status(201).json({
+        success: true,
+        id_token: createToken(user)
+      });
   });
 });
 
 router.get('/profile', verifyToken, (req, res) => {
   query.getUserByID(req.userID, (user) => {
     if (!user) return res.status(404).json({success: false, msg: 'No user found'});
-    res.status(200).json({success: true, user});
+    else res.status(200).json({success: true, user});
   }) 
 })
 

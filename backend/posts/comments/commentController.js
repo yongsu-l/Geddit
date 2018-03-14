@@ -22,7 +22,7 @@ router.put('/', verifyToken, (req, res) => {
     content: req.body.content
   }, (newComment) => {
     if (!newComment) res.status(400).json({success: false, msg : 'Failed to make comment'});
-    res.status(201).json({success: true, newComment});
+    else res.status(201).json({success: true, newComment});
   })
   
 })
