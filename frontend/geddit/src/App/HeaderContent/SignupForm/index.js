@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import {
   FormField,
@@ -26,10 +27,12 @@ class SignupForm extends Component {
     const {
       setHeaderContentState,
       setAppState,
+      history,
     } = this.props;
 
     setHeaderContentState({ toggled: null });
     setAppState({ disabledBody: false });
+    history.push('/' + history.location.search);    
   }
 
   onSignup(e) {
@@ -49,8 +52,15 @@ class SignupForm extends Component {
         password,
       })
         .then(json => {
-          console.log(json);
-          this.onClose();
+          if (json.success) {
+            window.localStorage.setItem('token', json.id_token);
+            this.props.setAppState({
+              username: json.username,
+            })
+            this.onClose();
+          } else {
+            console.log(json.msg);
+          }
         })
     }
     
@@ -116,4 +126,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default withRouter(SignupForm);

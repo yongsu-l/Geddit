@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
@@ -25,22 +26,46 @@ class HeaderContent extends Component {
     this.renderIfNotLoggedIn = this.renderIfNotLoggedIn.bind(this);
   }
 
+  componentDidMount() {
+    const { history } = this.props;
+
+    switch(history.location.pathname) {
+      case '/signup':
+        this.onToggle({ target: { textContent: 'Sign Up' } });
+        break;
+      case '/login':
+        this.onToggle({ target: { textContent: 'Log In' } });
+        break;
+      default:
+        break;
+    }
+  }
+
   setHeaderContentState(state) {
     this.setState(state);
   }
 
   onToggle(e) {
+    const { textContent } = e.target;
     const {
       setAppState,
+      history,
     } = this.props;
 
-    if (this.state.toggled === e.target.textContent) {
+    var pathname = '/'
+
+    if (this.state.toggled === textContent) {
       this.setState({ toggled: null });
       setAppState({ disabledBody: false });
 
     } else {
-      this.setState({ toggled: e.target.textContent });
+      this.setState({ toggled: textContent });
       setAppState({ disabledBody: true });
+      if (textContent === 'Sign Up') {
+        pathname = '/signup';
+      } else {
+        pathname = '/login';
+      }
 
       const bodyView = document.getElementById('body-view');
       bodyView.addEventListener(
@@ -48,11 +73,13 @@ class HeaderContent extends Component {
         () => {
           this.setState({ toggled: null });
           setAppState({ disabledBody: false });
+          history.push('/' + history.location.search);
         },
         { once: true }
       );
-
     }
+
+    history.push(pathname + history.location.search);
   }
 
   renderIfLoggedIn() {
@@ -115,4 +142,4 @@ class HeaderContent extends Component {
   }
 }
 
-export default HeaderContent;
+export default withRouter(HeaderContent);

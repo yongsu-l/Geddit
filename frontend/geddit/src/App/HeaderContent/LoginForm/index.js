@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import {
   FormField,
@@ -26,10 +27,12 @@ class LoginForm extends Component {
     const {
       setHeaderContentState,
       setAppState,
+      history,
     } = this.props;
 
     setHeaderContentState({ toggled: null });
     setAppState({ disabledBody: false });
+    history.push('/' + history.location.search);
   }
 
   onLogin(e) {
@@ -47,10 +50,10 @@ class LoginForm extends Component {
           this.props.setAppState({
             username: json.username,
           })
+          this.onClose();
         } else {
           console.log(json.msg);
         }
-        console.log(json);
       })
   }
 
@@ -95,4 +98,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);

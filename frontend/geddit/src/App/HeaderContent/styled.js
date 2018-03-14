@@ -34,6 +34,7 @@ const MenuButton = Button.extend`
   font-weight: 100;
   border: 0;
   color: #E65100;
+  background: #f7f7f7;
 
   :focus {
     color: #E65100;
