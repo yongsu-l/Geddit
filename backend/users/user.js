@@ -28,7 +28,7 @@ module.exports = {
     db.get().query('SELECT * FROM users WHERE userID = ? LIMIT 1', [userID], (err, rows, fields) => {
       if (err) throw err;
       //console.log(rows);
-      done(rows[0]);
+      done(rows[0].username);
     });
   },
 

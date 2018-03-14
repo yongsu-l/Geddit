@@ -84,10 +84,10 @@ router.post('/login', (req, res) => {
   });
 });
 
-router.get('/profile', verifyToken, (req, res) => {
-  query.getUserByID(req.userID, (user) => {
-    if (!user) return res.status(404).json({success: false, msg: 'No user found'});
-    else res.status(200).json({success: true, user});
+router.get('/authorize', verifyToken, (req, res) => {
+  query.getUserByID(req.userID, (username) => {
+    if (!username) return res.status(404).json({success: false, msg: 'No user found'});
+    else res.status(200).json({success: true, username : username});
   }) 
 })
 
