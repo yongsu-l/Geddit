@@ -32,16 +32,8 @@ WIP
 * [NodeJS](https://nodejs.org/en/)
 * * [MySQLJS](https://github.com/mysqljs/mysql)
 * * [JWT](https://github.com/auth0/node-jsonwebtoken)
-*
 * ## Contributing
-*
-*
 * ## Authors
-*
 * * **Yong Su Lee** - *Initial work* - [Yong-L](https://github.com/Yong-L)
-*
-*
 * * **Yao Cheng** - *Initial work* - [yaoc1996](https://github.com/yaoc1996)
-*
-*
 * * **Brandon Dinh-Le** - *Initial work* - [bdinhle](https://github.com/bdinhle)
