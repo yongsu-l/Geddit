@@ -1,6 +1,7 @@
 import {
   Label,
   Button,
+  Form,
 } from 'styled';
 
 const LogoLabel = Label.extend`
@@ -41,10 +42,45 @@ const MenuButton = Button.extend`
   }
 `
 
+const LoginFormView = Form.extend`
+  z-index: 100;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 264px;
+  background: white;
+  border-top: 0;
+`
+
+
+const SignupFormView = Form.extend`
+  z-index: 100;
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 264px;
+  background: white;
+  border-top: 0;
+`
+
+const CloseButton = Button.extend`
+  float: right;
+  margin: -16px 4px 0 0;
+  border: 0;
+
+  :hover {
+    background: transparent;
+    font-weight: 400;
+  }
+`
+
 export {
   LogoLabel,
   ControlButton,
   MenuButton,
   FloatRightLabel,
   UsernameLabel,
+  LoginFormView,
+  SignupFormView,
+  CloseButton,
 }

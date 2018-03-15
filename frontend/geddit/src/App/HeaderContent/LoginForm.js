@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
 
 import {
+  FieldSet,
   FormField,
   FormFieldLabel,
   FormFieldInput,
@@ -13,74 +13,37 @@ import {
   CloseButton,
 } from './styled';
 
-import postLogin from 'lib/postLogin';
+const LoginForm = props => {
+  const { 
+    submitting,
+    onFormClose,
+    onLogin,
+  } = props;
 
-class LoginForm extends Component {
-  constructor() {
-    super();
-
-    this.onClose = this.onClose.bind(this);
-    this.onLogin = this.onLogin.bind(this);
+  const closeButtonProps = {
+    type: 'button',
+    onClick: onFormClose,
   }
 
-  onClose() {
-    const {
-      setHeaderContentState,
-      setAppState,
-      history,
-    } = this.props;
-
-    setHeaderContentState({ toggled: null });
-    setAppState({ disabledBody: false });
-    history.push('/' + history.location.search);
+  const usernameInputProps = {
+    type: 'text',
+    name: 'username',
+    required: true,
   }
 
-  onLogin(e) {
-    e.preventDefault();
-    const username = e.target.username.value;
-    const password = e.target.password.value;
-    
-    postLogin({
-      username, 
-      password,
-    })
-      .then(json => {
-        if (json.success) {
-          window.localStorage.setItem('token', json.id_token);
-          this.props.setAppState({
-            username: json.username,
-          })
-          this.onClose();
-        } else {
-          console.log(json.msg);
-        }
-      })
+  const passwordInputProps = {
+    type: 'password',
+    name: 'password',
+    required: true,
   }
 
-  render() {
-    const closeButtonProps = {
-      type: 'button',
-      onClick: this.onClose,
-    }
+  const formProps = {
+    onSubmit: onLogin,
+  }
 
-    const usernameInputProps = {
-      type: 'text',
-      name: 'username',
-      required: true,
-    }
-
-    const passwordInputProps = {
-      type: 'password',
-      name: 'password',
-      required: true,
-    }
-
-    const formProps = {
-      onSubmit: this.onLogin,
-    }
-
-    return (
-      <LoginFormView { ...formProps } >
+  return (
+    <LoginFormView { ...formProps } >
+      <FieldSet disabled={submitting}>
         <CloseButton { ...closeButtonProps } >x</CloseButton>
         <FormField>
           <FormFieldLabel >Username</FormFieldLabel>
@@ -93,9 +56,9 @@ class LoginForm extends Component {
         <FormField>
           <FormButton>Log In</FormButton>
         </FormField>
-      </LoginFormView>
-    )
-  }
+      </FieldSet>
+    </LoginFormView>
+  )
 }
 
-export default withRouter(LoginForm);
+export default LoginForm;
