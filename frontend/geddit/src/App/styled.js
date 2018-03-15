@@ -1,10 +1,16 @@
 import styled from 'styled-components';
+import bg from 'static/bg.jpg';
 
 const AppView = styled.div`
   width: 100vw;
   height: 100vh;
   position: relative;
   overflow: hidden;
+  background: url(${bg});
+  background-color: #1a1a1a;
+  background-size: auto auto;
+  background-repeat: no-repeat;
+  background-position: center;
   transition: width .33s ease, height .33s ease;
 `
 
@@ -23,6 +29,7 @@ const BodyView = styled.div`
   width: 100%;
   height: calc(100% - 50px);
   text-align: left;
+  overflow-y: auto;
 `
 
 const Mask = styled.div`
