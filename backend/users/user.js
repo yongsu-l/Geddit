@@ -4,7 +4,6 @@ const db = require('../config/db');
 
 db.connect();
 
-
 module.exports = {
   createUser : (user, done) => {
     db.get().query('INSERT INTO users SET ?', [user], (err, result) => {
