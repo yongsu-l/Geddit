@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS posts (
   content MediumText NOT NULL,
   dateCreated datetime DEFAULT NOW(),
   lastUpdated datetime DEFAULT NOW() ON UPDATE NOW(),
+  votes int DEFAULT 0 NOT NULL,
   Primary Key (postID),
   Foreign Key (userID) REFERENCES users(userID)
 );
