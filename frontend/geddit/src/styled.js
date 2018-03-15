@@ -46,6 +46,12 @@ const Form = styled.form`
   animation: fade-in .35s ease-out;
 `
 
+const FieldSet = styled.fieldset`
+  margin: 0;
+  padding: 0;
+  border: 0;
+`
+
 const FormField = styled.div`
   padding: 20px 20px 0 20px;
   width: calc(100% - 40px);
@@ -69,18 +75,23 @@ const FormButton = Button.extend`
 `
 
 const Loader = styled.div`
-  border: 16px solid #f3f3f3; 
-  border-top: 16px solid #3498db;
+  position: absolute;
+  top: calc(50% + 30px);
+  left: calc(50% - 15px);
+  border: 2px solid #333; 
+  border-top: 2px solid #f3f3f3;
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+  width: 30px;
+  height: 30px;
+  opacity: 0.8;
+  animation: spin 0.5s ease-out infinite;
 `
 
 export {
   Label,
   Button,
   Form,
+  FieldSet,
   FormField,
   FormFieldLabel,
   FormFieldInput,
