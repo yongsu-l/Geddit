@@ -6,9 +6,15 @@ db.connect();
 
 module.exports = {
   makeComment : (comment, done) => {
-    db.get().query('INSERT INTO comments SET ?', [comment], (err, result) => {
-      if (err) throw err;
-      done(result);
-    });
+    db.get().query('SELECT * FROM comments WHERE commentID = ?', [comment.parentID], (err, rows, field) => {
+      if (rows.length > 0) {
+        db.get().query('INSERT INTO comments SET ?', [comment], (err, result) => {
+          if (err) throw err;
+          done(true);
+        });
+      } else {
+        done(false);
+      }
+    })
   }
 }
