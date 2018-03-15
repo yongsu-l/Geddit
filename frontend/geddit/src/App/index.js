@@ -80,6 +80,7 @@ class App extends Component {
       redirect(history.location.pathname); 
       updateLoadingState();
     }
+    
   }
 
   setAppState(state) {
