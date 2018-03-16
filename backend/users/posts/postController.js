@@ -27,9 +27,9 @@ router.post('/create', verifyToken, (req, res) => {
     userID: req.userID,
     title: req.body.title,
     content: req.body.content
-  }, (newPost) => {
-    if (!newPost) res.status(400).json({success: false, msg: 'Post creation failed'});
-    else res.status(200).json({success:true, msg: 'Post successfully created'});
+  }, (postID) => {
+    if (!postID) res.status(400).json({success: false, msg: 'Post creation failed'});
+    else res.status(200).json({success:true, postID});
   });
 });
 

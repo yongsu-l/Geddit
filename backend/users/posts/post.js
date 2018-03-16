@@ -15,15 +15,7 @@ module.exports = {
   createPost: (post, done) => {
     db.get().query('INSERT INTO posts SET ?', [post], (err, result) => {
       if (err) throw err;
-      const newPost = {
-        postID: result.postID,
-        userID: result.userID,
-        title: result.title,
-        content: result.content,
-        dateCreated: result.dateCreated,
-        dateUpdated: result.dateUpdated
-      };
-      done(newPost);
+      done(result.insertId);
     })
   }
 };
