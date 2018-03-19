@@ -1,12 +1,19 @@
+import styled from 'styled-components';
+
 import {
   Label,
   Button,
   Form,
+  Loader,
 } from 'styled';
 
 const LogoLabel = Label.extend`
   line-height: 50px;
   background: #f7f7f7;
+
+  :hover {
+    cursor: pointer;
+  }
 `
 
 const ControlButton = Button.extend`
@@ -74,6 +81,18 @@ const CloseButton = Button.extend`
   }
 `
 
+const LoaderWrapper = styled.div`
+  position: absolute;
+  right: 32px;
+  bottom: 22px;
+  width: 30px;
+  height: 30px;
+`
+
+const InvertedLoader = Loader.extend`
+  filter: invert(100%);
+`
+
 export {
   LogoLabel,
   ControlButton,
@@ -83,4 +102,6 @@ export {
   LoginFormView,
   SignupFormView,
   CloseButton,
+  LoaderWrapper,
+  InvertedLoader,
 }

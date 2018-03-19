@@ -10,12 +10,15 @@ import {
 import {
   SignupFormView,
   CloseButton,
+  LoaderWrapper,
+  InvertedLoader,
 } from './styled';
 
 const SignupForm = props => {
   const {
     onSignup,
     onFormClose,
+    submitting,
   } = props;
 
   const signupFormProps = {
@@ -50,6 +53,10 @@ const SignupForm = props => {
     name: 'confirm',
   }
 
+  const formButtonProps = {
+    submitting,
+  }
+
   return (
     <SignupFormView { ...signupFormProps } >
       <CloseButton { ...closeButtonProps } >x</CloseButton>
@@ -70,7 +77,13 @@ const SignupForm = props => {
         <FormFieldInput { ...confirmInputProps } />
       </FormField>
       <FormField>
-        <FormButton>Sign Up</FormButton>
+        {
+          submitting &&
+          <LoaderWrapper>
+            <InvertedLoader />
+          </LoaderWrapper>
+        }
+        <FormButton { ...formButtonProps } >Sign Up</FormButton>
       </FormField>
     </SignupFormView>
   )

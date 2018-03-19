@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  FieldSet,
   FormField,
   FormFieldLabel,
   FormFieldInput,
@@ -11,6 +10,8 @@ import {
 import {
   LoginFormView,
   CloseButton,
+  LoaderWrapper,
+  InvertedLoader,
 } from './styled';
 
 const LoginForm = props => {
@@ -41,9 +42,12 @@ const LoginForm = props => {
     onSubmit: onLogin,
   }
 
+  const formButtonProps = {
+    submitting,
+  }
+
   return (
     <LoginFormView { ...formProps } >
-      <FieldSet disabled={submitting}>
         <CloseButton { ...closeButtonProps } >x</CloseButton>
         <FormField>
           <FormFieldLabel >Username</FormFieldLabel>
@@ -54,9 +58,14 @@ const LoginForm = props => {
           <FormFieldInput { ...passwordInputProps } />
         </FormField>
         <FormField>
-          <FormButton>Log In</FormButton>
+          {
+            submitting &&
+              <LoaderWrapper>
+                <InvertedLoader />
+              </LoaderWrapper>
+          }
+          <FormButton { ...formButtonProps } >Log In</FormButton>
         </FormField>
-      </FieldSet>
     </LoginFormView>
   )
 }

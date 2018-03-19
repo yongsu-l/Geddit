@@ -15,6 +15,7 @@ import {
 import postLogin from 'lib/postLogin';
 import postSignup from 'lib/postSignup';
 import listenerHandler from 'lib/listenerHandler';
+import setTimeoutOrUntilExec from 'lib/setTimeoutOrUntilExec';
 
 class HeaderContent extends Component {
   constructor() {
@@ -28,6 +29,7 @@ class HeaderContent extends Component {
     this.handlers = {};
     
     this.setToggle = this.setToggle.bind(this);
+    this.onHomeClick = this.onHomeClick.bind(this);
     this.onToggle = this.onToggle.bind(this);
     this.onFormClose = this.onFormClose.bind(this);
     this.onLogin = this.onLogin.bind(this);
@@ -50,7 +52,6 @@ class HeaderContent extends Component {
           this.handlers.toggleHandler.rmvListener();
           setAppState({ disabledBody: false });
           this.setState({ toggled: null });
-          history.push('/' + history.location.search);
         }
       },
     )
@@ -64,6 +65,24 @@ class HeaderContent extends Component {
         break;
       default:
         break;
+    }
+  }
+
+  shouldComponentUpdate() {
+    return !this.state.submitting;
+  }
+
+  onHomeClick() {
+    if (!this.state.submitting) {
+      const {
+        setAppState,
+        history,
+      } = this.props;
+  
+      setAppState({ disabledBody: false });
+      this.setState({ toggled: null });
+      this.handlers.toggleHandler.rmvListener();
+      history.push('/');
     }
   }
 
@@ -82,12 +101,6 @@ class HeaderContent extends Component {
       toggleHandler.addListener();
       setAppState({ disabledBody: true });
       this.setState({ toggled: toggle });
-
-      if (toggle === 'Sign Up') {
-        history.push('/signup' + history.location.search);
-      } else {
-        history.push('/login' + history.location.search);
-      }
     }
   }
 
@@ -104,42 +117,52 @@ class HeaderContent extends Component {
 
     this.setState({ toggled: null });
     setAppState({ disabledBody: false });
-    history.push('/' + history.location.search);
   }
 
   onLogin(e) {
     e.preventDefault();
+    this.handlers.toggleHandler.rmvListener();    
+
     const username = e.target.username.value;
     const password = e.target.password.value;
 
     const { setAppState } = this.props;
     
+    this.setState({ submitting: true });
+    const exec = setTimeoutOrUntilExec(() => {
+      this.setState({ submitting: false });
+      this.onFormClose();
+    }, 1333);
+    
     postLogin({
       username, 
       password,
     })
-      .then(json => {
-        if (json.success) {
+    .then(json => {
+      if (json && json.success) {
           window.localStorage.setItem('token', json.id_token);
-          setAppState({
-            username: json.username,
-          })
-          this.onFormClose();          
-        } else {
-          console.log(json.msg);
+          setAppState({ username: json.username })
+          exec();
         }
       })
   }
 
   onSignup(e) {
     e.preventDefault();
-
-    const { setAppState } = this.props;
+    this.handlers.toggleHandler.rmvListener();    
 
     const username = e.target.username.value,
           email = e.target.email.value,
           password = e.target.password.value,
           confirm = e.target.confirm.value;
+
+    const { setAppState } = this.props;
+
+    this.setState({ submitting: true });
+    const exec = setTimeoutOrUntilExec(() => {
+      this.setState({ submitting: false });
+      this.onFormClose();
+    }, 1333);
 
     if (password === confirm) {
       postSignup({
@@ -148,14 +171,12 @@ class HeaderContent extends Component {
         password,
       })
         .then(json => {
-          if (json.success) {
+          if (json && json.success) {
             window.localStorage.setItem('token', json.id_token);
             setAppState({
               username: json.username,
             })
-            this.onFormClose();
-          } else {
-            console.log(json.msg);
+            exec();
           }
         })
     }
@@ -212,15 +233,18 @@ class HeaderContent extends Component {
 
   render() {
     const {
+      onHomeClick,
       renderIfLoggedIn,
       renderIfNotLoggedIn
     } = this;
 
     const { username } = this.props;
 
+
     return (
       <Fragment>
-        <LogoLabel>geddit</LogoLabel>
+        <LogoLabel
+          onClick={onHomeClick} >geddit</LogoLabel>
         {
           username
             ? renderIfLoggedIn()
