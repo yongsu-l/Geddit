@@ -1,9 +1,10 @@
-function postDiscussion(body) {
+function postDiscussion(token, body) {
   return (
     fetch('/user/post/create', {
-      method: 'PUT',
-      header: {
-        'Authorization': 'JWT token',
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
     })
