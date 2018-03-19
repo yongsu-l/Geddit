@@ -30,7 +30,8 @@ function parseComment(data) {
 
 module.exports = {
   getPostByID : (postID, done) => {
-    db.get().query('SELECT * FROM posts WHERE postID = ? LIMIT 1', [postID], (err, post_rows, fields) => {
+    db.get().query(`SELECT title, content, dateCreated, votes, username
+                    FROM posts NATURAL JOIN users WHERE postID = ? LIMIT 1`, [postID], (err, post_rows, fields) => {
       if (err) throw err;
       if (post_rows.length === 0) return done(null);
       db.get().query('SELECT * FROM comments where postID = ?', [postID], (err, comment_rows, fields) => {
