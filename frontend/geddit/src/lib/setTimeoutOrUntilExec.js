@@ -1,4 +1,4 @@
-function setTimeoutUntilExec(func, timeout) {
+function setTimeoutOrUntilExec(func, timeout) {
   var state = false;
   const check = () => {
     if (state) func();
@@ -9,4 +9,4 @@ function setTimeoutUntilExec(func, timeout) {
   return check;
 }
 
-export default setTimeoutUntilExec;
+export default setTimeoutOrUntilExec;
