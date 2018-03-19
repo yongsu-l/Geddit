@@ -40,20 +40,15 @@ const FeedControl = props => {
     type,
   } = props;
   
-  const newToggleProps = {
-    onClick: onToggle,
-    toggled: type === 'New',
-  }
-
-  const topToggleProps = {
-    onClick: onToggle,
-    toggled: type === 'Top',
-  }
-
   return (
     <Fragment>
-      <ToggleButton { ...newToggleProps } >New</ToggleButton>
-      <ToggleButton { ...topToggleProps } >Top</ToggleButton>
+      <ToggleButton
+        onClick={onToggle}
+        toggled={type === 'New'} >New</ToggleButton>
+
+      <ToggleButton
+        onClick={onToggle}
+        toggled={type === 'Top'} >Top</ToggleButton>
     </Fragment>
   )
 }

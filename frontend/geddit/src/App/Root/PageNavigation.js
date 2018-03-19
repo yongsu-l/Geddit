@@ -57,15 +57,6 @@ const PageNavigation = props => {
     onNextPage,
   } = props;
 
-  const pageButtonProps = page => ({
-    onClick: onGoToPage,
-    key: page,
-  })
-
-  const nextButtonProps = {
-    onClick: onNextPage,
-  }
-
   const renderPageButtons = () => {
     const currentPage = parseInt(page, 10);
     var lowerBound = currentPage - 4;
@@ -82,15 +73,19 @@ const PageNavigation = props => {
 
     return _.map(pageIndices, page => 
       page === currentPage
-        ? <SelectedPageButton key={page}>{page}</SelectedPageButton>
-        : <PageButton { ...pageButtonProps(page) } >{page}</PageButton>
+        ? <SelectedPageButton 
+            key={page}>{page}</SelectedPageButton>
+        : <PageButton
+            onClick={onGoToPage}
+            key={page} >{ page }</PageButton>
     )
   }
 
   return (
     <Fragment>
       { renderPageButtons() }
-      <NextButton { ...nextButtonProps } >Next</NextButton>
+      <NextButton
+        onClick={onNextPage} >Next</NextButton>
     </Fragment>
   )
 }
