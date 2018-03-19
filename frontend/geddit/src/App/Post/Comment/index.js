@@ -65,16 +65,8 @@ class Comment extends Component {
   }
 }
 
-const CommentSection = props => {
-  return (
-    _.map(props.comments, (comment, index) =>
-      <Comment
-        colorId={0}
-        comment={comment}
-        key={index}
-      />
-    )
-  )
+Comment.defaultProps = {
+  colorId: 0,
 }
 
-export default CommentSection;
+export default Comment;

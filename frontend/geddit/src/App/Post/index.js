@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
+import _ from 'lodash';
 
 import {
   PostView,
   CommentView,
 } from './styled';
 
-import CommentSection from './CommentSection';
+import Comment from './Comment';
 
 import parseQueryString from 'lib/parseQueryString';
 import getPost from 'lib/getPost';
@@ -15,7 +16,7 @@ class Post extends Component {
     super();
 
     this.state = {
-      post: null,
+      post: {},
       comments: commentSamples,
       loading: true,
     }
@@ -31,6 +32,7 @@ class Post extends Component {
           console.log(json);
           this.setState({
             loading: false,
+            post: json.post,
           })
         })
     } else {
@@ -44,21 +46,23 @@ class Post extends Component {
       comments,
       loading,
     } = this.state;
-
-    const commentSectionProps = {
-      comments,
-    }
-
+    
     return (
       loading
-        ? <div></div>
-        :  <Fragment>
+      ? <div></div>
+      :  <Fragment>
             <PostView>
-
+              {post.title} {post.content}
             </PostView>
 
             <CommentView>
-              <CommentSection { ...commentSectionProps } />
+              { 
+                _.map(comments, (comment, id) =>
+                  <Comment
+                    comment={comment}
+                    key={id} />
+                )
+              }
             </CommentView>
           </Fragment>
     )
