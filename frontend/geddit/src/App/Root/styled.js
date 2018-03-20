@@ -39,7 +39,7 @@ const PostFormView = styled.div.attrs({
   style: ({ collapsedForm }) => ({
     width: collapsedForm ? 'calc(30% - 16px)' : 'calc(36% - 16px)',
     height: collapsedForm ? 32 : 'calc(50vh + 112px)',
-    right: collapsedForm ? 'calc(5% + 12px)' : 26,
+    right: collapsedForm ? 'calc(5% + 7px)' : 'calc(2% + 7px)',
   })
 })`
   position: absolute;

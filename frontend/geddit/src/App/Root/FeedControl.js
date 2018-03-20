@@ -44,11 +44,11 @@ const FeedControl = props => {
     <Fragment>
       <ToggleButton
         onClick={onToggle}
-        toggled={type === 'New'} >New</ToggleButton>
+        toggled={type === 'new'} >New</ToggleButton>
 
       <ToggleButton
         onClick={onToggle}
-        toggled={type === 'Top'} >Top</ToggleButton>
+        toggled={type === 'top'} >Top</ToggleButton>
     </Fragment>
   )
 }

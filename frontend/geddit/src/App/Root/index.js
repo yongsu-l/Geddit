@@ -26,7 +26,7 @@ class Root extends Component {
       type: null,
       page: null,
       numPage: 16,
-      feed: feedSample,
+      feed: [],
       collapsedForm: true,
     }
 
@@ -35,7 +35,8 @@ class Root extends Component {
     this.loadFeed = this.loadFeed.bind(this);
     this.onNextPage = this.onNextPage.bind(this);
     this.onGoToPage = this.onGoToPage.bind(this);
-    this.onPostDiscussion = this.onPostDiscussion.bind(this);    
+    this.onPostDiscussion = this.onPostDiscussion.bind(this);  
+    this.redirectToPost = this.redirectToPost.bind(this);  
   }
 
   componentDidMount() {
@@ -58,7 +59,7 @@ class Root extends Component {
     if (verifyQueryString(queryString)) {
       var { type, page } = parseQueryString(queryString);
 
-      type = type || 'New';
+      type = type || 'new';
       page = page || '1';
 
       if (type !== this.state.type || page !== this.state.page) {
@@ -72,7 +73,13 @@ class Root extends Component {
           page,
         })
           .then(json => {
-            // set state feed
+            if (json && json.success) {
+              this.setState({
+                feed: json.posts,
+              })
+            } else {
+              console.log('error');
+            }
           })
       }
     } else {
@@ -81,13 +88,20 @@ class Root extends Component {
   }
 
   onToggle(e) {
-    const { textContent } = e.target,
+    const textContent = e.target.textContent.toLowerCase(),
           { type } = this.state,
           { history } = this.props;
 
     if (textContent !== type) {
       const { pathname } = history.location;
       history.push(`${pathname}?type=${textContent}&page=1`);
+    }
+  }
+
+  redirectToPost(id) {
+    const { history } = this.props;
+    return () => {
+      history.push(`/post?id=${id}`)
     }
   }
 
@@ -151,6 +165,7 @@ class Root extends Component {
       onNextPage,
       onGoToPage,
       onPostDiscussion,
+      redirectToPost,
     } = this;
 
     const {
@@ -172,7 +187,8 @@ class Root extends Component {
 
         <FeedView>
             <Feed
-              feed={feed} />
+              feed={feed}
+              redirectToPost={redirectToPost} />
         </FeedView>
 
         <PageNavigationView>

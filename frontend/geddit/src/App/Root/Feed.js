@@ -28,11 +28,12 @@ const PostTitle = Label.extend`
 `
 
 
-const Feed = ({ feed }) => {
+const Feed = ({ feed, redirectToPost }) => {
   const renderPost = (post, index) => {
     return (
       <PostWrapper key={index} >
-        <PostTitle>{post.title}</PostTitle>
+        <PostTitle
+          onClick={redirectToPost(post.postID)} >{post.title}</PostTitle>
         <div style={{ clear: 'both' }}>
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>comment</div>
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>share</div>
