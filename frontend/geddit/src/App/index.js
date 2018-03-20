@@ -32,6 +32,7 @@ class App extends Component {
     }
 
     this.setAppState = this.setAppState.bind(this);
+    this.loadApp = this.loadApp.bind(this);
   }
 
   componentDidMount() {
@@ -76,9 +77,15 @@ class App extends Component {
     this.setState(state);
   }
 
+  loadApp(timeout) {
+    this.props.load();
+    setTimeout(this.props.show, timeout);
+  }
+
   render() {
     const {
       setAppState,
+      loadApp,
     } = this;
 
     const {
@@ -91,7 +98,8 @@ class App extends Component {
         <HeaderView id='header-view'>
           <HeaderContent
             username={username}
-            setAppState={setAppState} />
+            setAppState={setAppState}
+            loadApp={loadApp} />
         </HeaderView>
         
         <BodyView id='body-view'>
@@ -99,7 +107,14 @@ class App extends Component {
             disabledBody && <Mask />
           }
           <Switch>
-            <Route exact path='/post' component={Post} />
+            <Route 
+              exact 
+              path='/post' 
+              render={props => 
+                <Post
+                  username={username}
+                  { ...props } />
+              } />
             <Route path='/' component={Root} />
           </Switch>
         </BodyView>
