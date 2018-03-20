@@ -5,6 +5,7 @@ import {
   FeedView,
   PostFormView,
   PageNavigationView,
+  PostButton,
 } from './styled';
 
 import FeedControl from './FeedControl';
@@ -13,6 +14,7 @@ import PageNavigation from './PageNavigation';
 import PostForm from './PostForm';
 
 import getFeed from 'lib/getFeed';
+import postDiscussion from 'lib/postDiscussion';
 import verifyQueryString from 'lib/verifyQueryString';
 import parseQueryString from 'lib/parseQueryString';
 
@@ -21,16 +23,20 @@ class Root extends Component {
     super();
 
     this.state = {
-      type: 'New',
-      page: '1',
+      type: null,
+      page: null,
       numPage: 16,
-      feed: feedSample,
+      feed: [],
+      collapsedForm: true,
     }
 
     this.onToggle = this.onToggle.bind(this);
+    this.onPostFormToggle = this.onPostFormToggle.bind(this);
     this.loadFeed = this.loadFeed.bind(this);
     this.onNextPage = this.onNextPage.bind(this);
     this.onGoToPage = this.onGoToPage.bind(this);
+    this.onPostDiscussion = this.onPostDiscussion.bind(this);  
+    this.redirectToPost = this.redirectToPost.bind(this);  
   }
 
   componentDidMount() {
@@ -49,11 +55,11 @@ class Root extends Component {
 
   loadFeed(queryString) {
     const { history } = this.props;
-
+    
     if (verifyQueryString(queryString)) {
       var { type, page } = parseQueryString(queryString);
 
-      type = type || 'New';
+      type = type || 'new';
       page = page || '1';
 
       if (type !== this.state.type || page !== this.state.page) {
@@ -67,7 +73,13 @@ class Root extends Component {
           page,
         })
           .then(json => {
-            // set state feed
+            if (json && json.success) {
+              this.setState({
+                feed: json.posts,
+              })
+            } else {
+              console.log('error');
+            }
           })
       }
     } else {
@@ -76,7 +88,7 @@ class Root extends Component {
   }
 
   onToggle(e) {
-    const { textContent } = e.target,
+    const textContent = e.target.textContent.toLowerCase(),
           { type } = this.state,
           { history } = this.props;
 
@@ -84,6 +96,19 @@ class Root extends Component {
       const { pathname } = history.location;
       history.push(`${pathname}?type=${textContent}&page=1`);
     }
+  }
+
+  redirectToPost(id) {
+    const { history } = this.props;
+    return () => {
+      history.push(`/post?id=${id}`)
+    }
+  }
+
+  onPostFormToggle() {
+    this.setState({
+      collapsedForm: !this.state.collapsedForm,
+    })
   }
 
   onNextPage() {
@@ -112,11 +137,35 @@ class Root extends Component {
     }
   }
 
+  onPostDiscussion(e) {
+    e.preventDefault();
+
+    const title = e.target.title.value;
+    const content = e.target.content.value;
+    const token = window.localStorage.getItem('token');
+
+    postDiscussion(token, {
+      title,
+      content,
+    })
+      .then(json => {
+        // redirect to post
+        if (json && json.success) {
+          this.props.history.push('/post?id=' + json.id);
+        } else {
+          // failed to create post
+        }
+      })
+  }
+
   render() {
     const {
       onToggle,
+      onPostFormToggle,
       onNextPage,
       onGoToPage,
+      onPostDiscussion,
+      redirectToPost,
     } = this;
 
     const {
@@ -124,41 +173,46 @@ class Root extends Component {
       type,
       page,
       numPage,
+      collapsedForm,
     } = this.state;
-
-    const feedControlProps = {
-      onToggle,
-      type,
-    }
-
-    const feedProps = { feed }
-
-    const pageNavigationProps = {
-      page,
-      numPage,
-      onNextPage,
-      onGoToPage,
-    }
 
     return (
       <Fragment>
         
         <FeedControlView>
-          <FeedControl { ...feedControlProps } />
+            <FeedControl 
+              onToggle={onToggle}
+              type={type} />
         </FeedControlView>
 
         <FeedView>
-          <Feed { ...feedProps } />
+            <Feed
+              feed={feed}
+              redirectToPost={redirectToPost} />
         </FeedView>
 
         <PageNavigationView>
-          <PageNavigation { ...pageNavigationProps } />
+            <PageNavigation
+              page={page}
+              numPage={numPage}
+              onNextPage={onNextPage}
+              onGoToPage={onGoToPage} />
         </PageNavigationView>
 
-        <PostFormView>
-          <PostForm />
+        <PostFormView
+          collapsedForm={collapsedForm}>
+          {
+            collapsedForm
+              ? <PostButton
+                  onClick={onPostFormToggle}
+                  children={
+                    'Start a New Discussion'
+                  } />
+              : <PostForm 
+                  onPostFormToggle={onPostFormToggle}
+                  onPostDiscussion={onPostDiscussion} />
+          }
         </PostFormView>
-
       </Fragment>
     )
   }

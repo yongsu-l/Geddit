@@ -10,67 +10,61 @@ import {
 import {
   SignupFormView,
   CloseButton,
+  LoaderWrapper,
+  InvertedLoader,
 } from './styled';
 
 const SignupForm = props => {
   const {
     onSignup,
     onFormClose,
+    submitting,
   } = props;
 
-  const signupFormProps = {
-    onSubmit: onSignup,
-  }
-
-  const closeButtonProps = {
-    type: 'button',
-    onClick: onFormClose,
-  }
-
-  const usernameInputProps = {
-    type: 'text',
-    name: 'username',
-    required: true,
-  }
-
-  const emailInputProps = {
-    type: 'text',
-    name: 'email',
-    required: true,
-  }
-
-  const passwordInputProps = {
-    type: 'password',
-    name: 'password',
-    required: true,
-  }
-
-  const confirmInputProps = {
-    ...passwordInputProps,
-    name: 'confirm',
-  }
-
   return (
-    <SignupFormView { ...signupFormProps } >
-      <CloseButton { ...closeButtonProps } >x</CloseButton>
+    <SignupFormView
+      onSubmit={onSignup} >
+
+      <CloseButton
+        type='button'
+        onClick={onFormClose} >x</CloseButton>
       <FormField>
         <FormFieldLabel >Username</FormFieldLabel>
-        <FormFieldInput { ...usernameInputProps } />
+        <FormFieldInput 
+          type='text'
+          name='username'
+          required />
       </FormField>
       <FormField>
         <FormFieldLabel >Email</FormFieldLabel>
-        <FormFieldInput { ...emailInputProps } />
+        <FormFieldInput
+          type='text'
+          name='email'
+          required />
       </FormField>
       <FormField>
         <FormFieldLabel >Password</FormFieldLabel>
-        <FormFieldInput { ...passwordInputProps } />
+        <FormFieldInput
+          type='password'
+          name='password'
+          required />
       </FormField>
       <FormField>
         <FormFieldLabel >Confirm Password</FormFieldLabel>
-        <FormFieldInput { ...confirmInputProps } />
+        <FormFieldInput
+          type='password'
+          name='confirm'
+          required />
       </FormField>
       <FormField>
-        <FormButton>Sign Up</FormButton>
+        {
+          submitting &&
+          <LoaderWrapper>
+            <InvertedLoader />
+          </LoaderWrapper>
+        }
+        <FormButton
+          submitting={submitting} >Sign Up</FormButton>
       </FormField>
     </SignupFormView>
   )
