@@ -3,7 +3,10 @@ import _ from 'lodash';
 
 import {
   CommentWrapper,
+  CommentP,
   CommentCount,
+  HandleLabel,
+  CountWrapper,
 } from './styled';
 
 
@@ -25,6 +28,10 @@ class Comment extends Component {
   }
 
   render() {
+    const {
+      onUncollapse,
+    } = this;
+
     const { 
       colorId,
       comment,
@@ -42,16 +49,22 @@ class Comment extends Component {
       onClick: this.onUncollapse,
     }
 
+    const s = comments.length > 1 ? 's' : '';
+
     return (
-      <CommentWrapper colorId={colorId}>
-        <div>{ content }</div>
-        <label style={{ marginLeft: 16, color: 'blue', }}>by: { username }</label>
+      <CommentWrapper 
+        colorId={colorId} 
+        collapsed={collapsed} >
+
+        <CommentP>{ content }</CommentP>
+        <HandleLabel>{ username }</HandleLabel>
         {
           comments.length > 0
             ? collapsed
-                ? <CommentCount { ...commentCountProps } >
-                    {comments.length} comment{comments.length > 1 ? 's' : ''}
-                  </CommentCount>
+                ? <CountWrapper>
+                    <CommentCount
+                      onClick={onUncollapse} >{comments.length} comment{s}</CommentCount>
+                  </CountWrapper>
                 : _.map(comments, (comment, index) => 
                     <Comment 
                       colorId={colorId+1}
