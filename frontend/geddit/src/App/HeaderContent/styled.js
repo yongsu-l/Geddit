@@ -32,19 +32,15 @@ const UsernameLabel = FloatRightLabel.extend`
   color: #E65100;
 `
 
-const MenuButton = Button.extend`
-  float: right;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  padding: 0;
-  font-size: 28px;
-  font-weight: 100;
-  border: 0;
+const LogoutLabel = FloatRightLabel.extend`
+  font-size: 12px;
   color: #E65100;
-  background: #f7f7f7;
 
-  :focus {
+  :hover {
+    color: #333;
+  }
+
+  :active {
     color: #E65100;
   }
 `
@@ -96,7 +92,7 @@ const InvertedLoader = Loader.extend`
 export {
   LogoLabel,
   ControlButton,
-  MenuButton,
+  LogoutLabel,
   FloatRightLabel,
   UsernameLabel,
   LoginFormView,

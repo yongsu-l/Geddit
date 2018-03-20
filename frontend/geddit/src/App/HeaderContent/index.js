@@ -7,9 +7,9 @@ import SignupForm from './SignupForm';
 import {
   LogoLabel,
   ControlButton,
-  MenuButton,
   FloatRightLabel,
   UsernameLabel,
+  LogoutLabel,
 } from './styled';
 
 import postLogin from 'lib/postLogin';
@@ -34,6 +34,7 @@ class HeaderContent extends Component {
     this.onFormClose = this.onFormClose.bind(this);
     this.onLogin = this.onLogin.bind(this);
     this.onSignup = this.onSignup.bind(this);
+    this.onLogout = this.onLogout.bind(this);
     this.renderIfLoggedIn = this.renderIfLoggedIn.bind(this);
     this.renderIfNotLoggedIn = this.renderIfNotLoggedIn.bind(this);
   }
@@ -90,7 +91,6 @@ class HeaderContent extends Component {
     const { toggleHandler } = this.handlers;
     const {
       setAppState,
-      history,
     } = this.props;
 
     if (this.state.toggled === toggle) {
@@ -112,7 +112,6 @@ class HeaderContent extends Component {
   onFormClose() {
     const {
       setAppState,
-      history,
     } = this.props;
 
     this.setState({ toggled: null });
@@ -138,12 +137,15 @@ class HeaderContent extends Component {
       username, 
       password,
     })
-    .then(json => {
-      if (json && json.success) {
+      .then(json => {
+        if (json && json.success) {
           window.localStorage.setItem('token', json.id_token);
           setAppState({ username: json.username })
           exec();
+        } else {
+          window.location.reload();
         }
+        console.log(json);
       })
   }
 
@@ -177,16 +179,31 @@ class HeaderContent extends Component {
               username: json.username,
             })
             exec();
+          } else {
+            window.location.reload();
           }
+          console.log(json);
         })
     }
+  }
+
+  onLogout() {
+    const {
+      setAppState,
+      loadApp,
+    } = this.props;
+
+    window.localStorage.clear();
+    setAppState({ username: null });
+    loadApp(1000);
   }
 
   renderIfLoggedIn() {
     const { username } = this.props;
     return (
       <Fragment>
-        <MenuButton>&equiv;</MenuButton>
+        <LogoutLabel
+          onClick={this.onLogout} >Logout</LogoutLabel>
         <UsernameLabel>{ username }</UsernameLabel>        
         <FloatRightLabel>Welcome!</FloatRightLabel>
       </Fragment>
