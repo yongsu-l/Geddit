@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import { Switch, withRouter, Route } from 'react-router-dom';
 
 import HeaderContent from './HeaderContent';
@@ -10,6 +10,7 @@ import {
   HeaderView,
   BodyView,
   Mask,
+  LoadingView,
   LoaderWrapper,
 } from './styled';
 
@@ -18,39 +19,35 @@ import {
 } from 'styled';
 
 import getAuthorization from 'lib/getAuthorization';
-import setTimeoutUntilExec from 'lib/setTimeoutUntilExec';
+import setTimeoutOrUntilExec from 'lib/setTimeoutOrUntilExec';
+import withLoader from 'lib/withLoader';
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      loading: true,
       username: null,
       disabledBody: false,
     }
 
     this.setAppState = this.setAppState.bind(this);
+    this.loadApp = this.loadApp.bind(this);
   }
 
   componentDidMount() {
-    window.localStorage.clear();
     const {
       history,
+      show,
     } = this.props;
 
-    const updateLoadingState = setTimeoutUntilExec(() => {
-      this.setState({
-        loading: false,
-      })
-    }, 1500);
+    const exec = setTimeoutOrUntilExec(show, 1666);
     
     const token = window.localStorage.getItem('token');
 
     const redirect = (pathname) => {
       switch (pathname) {
-        case '/signup':
-        case '/login':
+        case '/post':
         case '/':
           break;
         default:
@@ -61,75 +58,85 @@ class App extends Component {
     if (token) {
       getAuthorization(token)
         .then(json => {
-          const {
-            success,
-            username,
-          } = json;
-
-          if (success) {
+          if (json && json.success) {
             this.setState({
-              username,
-              loading: false,
+              username: json.username,
             })
           } else {
             redirect(history.location.pathname);
-            updateLoadingState();
           }
+          exec();
         })
     } else {
       redirect(history.location.pathname); 
-      updateLoadingState();
+      exec();
     }
-    
   }
 
   setAppState(state) {
     this.setState(state);
   }
 
+  loadApp(timeout) {
+    this.props.load();
+    setTimeout(this.props.show, timeout);
+  }
+
   render() {
     const {
       setAppState,
+      loadApp,
     } = this;
+
     const {
-      loading,
       username,
       disabledBody,
     } = this.state;
 
-    const headerProps = {
-      username,
-      setAppState,
-    }
-
     return (
       <AppView id='app-view' >
-        {
-          loading
-            ? <Loader />
-            : <Fragment>
-                <HeaderView id='header-view'>
-                  <HeaderContent { ...headerProps } />
-                </HeaderView>
-                
-                <BodyView id='body-view'>
-                  {
-                    disabledBody && <Mask />
-                  }
-                  <Switch>
-                    <Route exact path='/post' component={Post} />
-                    <Route path='/' component={Root} />
-                  </Switch>
-                </BodyView>
-              </Fragment>
-        }
+        <HeaderView id='header-view'>
+          <HeaderContent
+            username={username}
+            setAppState={setAppState}
+            loadApp={loadApp} />
+        </HeaderView>
+        
+        <BodyView id='body-view'>
+          {
+            disabledBody && <Mask />
+          }
+          <Switch>
+            <Route 
+              exact 
+              path='/post' 
+              render={props => 
+                <Post
+                  username={username}
+                  { ...props } />
+              } />
+            <Route 
+              path='/' 
+              render={props =>
+                <Root
+                  setAppState={setAppState}
+                  { ...props } />
+              } />
+          </Switch>
+        </BodyView>
       </AppView>
     );
   }
 }
 
-export default withRouter(App);
+const AppLoader = props =>
+  <LoadingView>
+    <LoaderWrapper>
+      <Loader />
+    </LoaderWrapper>
+  </LoadingView>
 
-const sampleUser = {
-  username: 'yaoc1996',
-}
+export default withRouter(withLoader({
+  Component: App,
+  Loader: AppLoader,
+}));

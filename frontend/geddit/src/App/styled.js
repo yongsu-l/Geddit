@@ -6,12 +6,7 @@ const AppView = styled.div`
   height: 100vh;
   position: relative;
   overflow: hidden;
-  background: url(${bg});
-  background-color: #1a1a1a;
-  background-size: auto auto;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: width .33s ease, height .33s ease;
+  transition: width .33s ease, height .33s ease;  
 `
 
 const HeaderView = styled.div`
@@ -28,6 +23,7 @@ const BodyView = styled.div`
   position: relative;
   width: 100%;
   height: calc(100% - 50px);
+  background: #eee;
   text-align: left;
   overflow-y: auto;
 `
@@ -44,9 +40,33 @@ const Mask = styled.div`
   animation: fade-in .3s ease;
 `
 
+const LoadingView = styled.div`
+  z-index: 999999;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url(${bg});
+  background-color: #1a1a1a;
+  background-size: auto auto;
+  background-repeat: no-repeat;
+  background-position: center;
+`
+
+const LoaderWrapper = styled.div`
+  position: absolute;
+  top: calc(50% + 30px);
+  left: calc(50% - 15px);
+  width: 30px;
+  height: 30px;
+`
+
 export {
   AppView,
   HeaderView,
   BodyView,
   Mask,
+  LoadingView,
+  LoaderWrapper,
 }

@@ -1,16 +1,19 @@
-function postDiscussion(token, body) {
+function putUpvote({ token, postID, upvote }) {
   return (
-    fetch('/user/post/create', {
-      method: 'POST',
+    fetch('/post/vote', {
+      method: 'PUT',
       headers: {
         'x-access-token': token,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        postID,
+        upvote,
+      })
     })
       .then(res => res.json())
       .catch(e => console.log(e))
   )
 }
 
-export default postDiscussion;
+export default putUpvote;

@@ -1,4 +1,25 @@
 USE geddit;
-INSERT INTO users SET username = 'test123', password = 'password';
-INSERT INTO posts SET userID = 1, title = 'Awesome title', content = 'Content';
-INSERT INTO comments SET userID = 1, postID = 1, content = 'Awesome comment';
+
+LOAD DATA LOCAL INFILE 'user.csv'
+INTO TABLE users
+FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(username, email, password);
+
+LOAD DATA LOCAL INFILE 'post.csv'
+INTO TABLE posts
+FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(userID, title, content);
+
+LOAD DATA LOCAL INFILE 'comment.csv'
+INTO TABLE comments
+FIELDS TERMINATED BY ','
+    ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+IGNORE 1 LINES
+(postID, userID, content);

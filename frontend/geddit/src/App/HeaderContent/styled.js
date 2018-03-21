@@ -1,12 +1,19 @@
+import styled from 'styled-components';
+
 import {
   Label,
   Button,
   Form,
+  Loader,
 } from 'styled';
 
 const LogoLabel = Label.extend`
   line-height: 50px;
   background: #f7f7f7;
+
+  :hover {
+    cursor: pointer;
+  }
 `
 
 const ControlButton = Button.extend`
@@ -25,19 +32,15 @@ const UsernameLabel = FloatRightLabel.extend`
   color: #E65100;
 `
 
-const MenuButton = Button.extend`
-  float: right;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  padding: 0;
-  font-size: 28px;
-  font-weight: 100;
-  border: 0;
+const LogoutLabel = FloatRightLabel.extend`
+  font-size: 12px;
   color: #E65100;
-  background: #f7f7f7;
 
-  :focus {
+  :hover {
+    color: #333;
+  }
+
+  :active {
     color: #E65100;
   }
 `
@@ -74,13 +77,27 @@ const CloseButton = Button.extend`
   }
 `
 
+const LoaderWrapper = styled.div`
+  position: absolute;
+  right: 32px;
+  bottom: 22px;
+  width: 30px;
+  height: 30px;
+`
+
+const InvertedLoader = Loader.extend`
+  filter: invert(100%);
+`
+
 export {
   LogoLabel,
   ControlButton,
-  MenuButton,
+  LogoutLabel,
   FloatRightLabel,
   UsernameLabel,
   LoginFormView,
   SignupFormView,
   CloseButton,
+  LoaderWrapper,
+  InvertedLoader,
 }

@@ -1,14 +1,30 @@
 import React, { Component, Fragment } from 'react';
+import _ from 'lodash';
 
 import {
+  PostBG,
+  PostContainer,
   PostView,
+  TitleLabel,
+  ContentP,
+  HandleLabel,
+  Control,
+  ControlButton,
+  VoteCount,
+  VoteButton,
   CommentView,
+  CommentBox,
+  DateLabel,
+  TimeLabel,
 } from './styled';
 
-import CommentSection from './CommentSection';
+import Comment from './Comment';
 
 import parseQueryString from 'lib/parseQueryString';
+import parseTimestamp from 'lib/parseTimestamp';
 import getPost from 'lib/getPost';
+import postComment from 'lib/postComment';
+import putUpvote from 'lib/putUpvote';
 
 class Post extends Component {
   constructor() {
@@ -16,51 +32,181 @@ class Post extends Component {
 
     this.state = {
       post: null,
-      comments: commentSamples,
-      loading: true,
+      comments: null,
+      visibleCommentBox: false,
     }
+
+    this.onToggleCommentBox = this.onToggleCommentBox.bind(this);
+    this.onCommentPost = this.onCommentPost.bind(this);
+    this.onUpvote = this.onUpvote.bind(this);
   }
 
   componentDidMount() {
     const { history } = this.props;
     const { id } = parseQueryString(history.location.search);
 
-    if (id) {
+    if (id && !this.state.post) {
       getPost(id)
         .then(json => {
+          if (json && json.success) {
+            this.setState({
+              post: json.post,
+              comments: json.post.comments,
+            })
+          } else {
+            history.push('/');
+          }
           console.log(json);
-          this.setState({
-            loading: false,
-          })
         })
     } else {
       history.push('/')
     }
   }
 
+  onToggleCommentBox() {
+    this.setState(state => ({
+      visibleCommentBox: !state.visibleCommentBox,
+    }))
+  }
+
+  onCommentPost(e) {
+    e.preventDefault();
+
+    const token = window.localStorage.getItem('token');
+    const content = e.target.comment.value;
+    const { history } = this.props;
+    const { id } = parseQueryString(history.location.search);    
+
+    postComment({
+      token,
+      postID: id,
+      content,
+    })
+      .then(json => {
+        if (json && json.success) {
+          this.setState(({ comments }) => {
+            comments.push(json.newComment);
+            return {
+              comments,
+              visibleCommentBox: false,
+            }
+          })
+        }
+        console.log(json);
+      })
+  }
+
+  onUpvote(e) {
+    const token = window.localStorage.getItem('token');
+    const { history } = this.props;
+    const { id } = parseQueryString(history.location.search);
+
+    putUpvote({ 
+      token, 
+      postID: id, 
+      upvote: true
+    })
+      .then(json => {
+        if (json && json.success) {
+          this.setState(({ post }) => {
+            post.votes++;
+            return {
+              post,
+            }
+          })
+        }
+        console.log(json);
+      })
+  }
+
   render() {
+    const {
+      onToggleCommentBox,
+      onCommentPost,
+    } = this;
+
     const {
       post,
       comments,
-      loading,
+      visibleCommentBox,
     } = this.state;
 
-    const commentSectionProps = {
-      comments,
-    }
+    const parsedTimestamp = post && parseTimestamp(post.dateCreated);
+    const postID = parseQueryString(this.props.history.location.search).id;
 
     return (
-      loading
-        ? <div></div>
-        :  <Fragment>
+      post &&
+        <PostBG>
+          <PostContainer>
             <PostView>
-
+              <TitleLabel>{ post.title }</TitleLabel>
+              <HandleLabel>submitted by { post.username }</HandleLabel>
+              <ContentP>{ post.content }</ContentP>
+              <DateLabel>{ parsedTimestamp.date }</DateLabel>
+              <TimeLabel>{ parsedTimestamp.time }</TimeLabel>
             </PostView>
+            <Control
+              visibleCommentBox={visibleCommentBox} >
+              <VoteButton
+                style={{
+                  color: 'darkblue',
+                }}
+                onClick={this.onUpvote} >thumb_up</VoteButton>
+              <VoteCount
+                votes={post.votes} >{ post.votes }</VoteCount>
+              <VoteButton
+                style={{
+                  transform: 'rotate(180deg)',
+                  color: 'darkred',
+                }} >thumb_up</VoteButton>            
+              {
+                visibleCommentBox
+                  ? <form
+                      onSubmit={onCommentPost}>
+                      <div style={{ 
+                        fontSize: 12, 
+                        color: '#777',
+                        marginTop: 12,
+                        }} >Comment</div>
+                      <CommentBox 
+                        type='text'
+                        name='comment'
+                        required />
+                      <ControlButton>Comment</ControlButton>
+                      <ControlButton
+                        type='button'
+                        style={{
+                          color: 'red',
+                        }}
+                        onClick={onToggleCommentBox} >Cancel</ControlButton>                    
+                    </form>
+                  : <Fragment>
+                      <ControlButton
+                        onClick={onToggleCommentBox}>Comment</ControlButton>
+                    </Fragment>
+              }
+            </Control>
+          </PostContainer>
 
-            <CommentView>
-              <CommentSection { ...commentSectionProps } />
-            </CommentView>
-          </Fragment>
+          <CommentView>
+            <div 
+              style={{
+                color: 'white',
+                fontWeight: 400,
+              }} >Comments</div>
+            { 
+              (comments.length > 0)
+                ? _.map(comments, (comment, id) =>
+                    <Comment
+                      comment={comment}
+                      key={id}
+                      postID={postID} />
+                  )
+                : <div>No Comments</div>
+            }
+          </CommentView>
+        </PostBG>
+        
     )
   }
 }

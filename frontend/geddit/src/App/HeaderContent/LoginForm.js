@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-  FieldSet,
   FormField,
   FormFieldLabel,
   FormFieldInput,
@@ -11,6 +10,8 @@ import {
 import {
   LoginFormView,
   CloseButton,
+  LoaderWrapper,
+  InvertedLoader,
 } from './styled';
 
 const LoginForm = props => {
@@ -20,43 +21,37 @@ const LoginForm = props => {
     onLogin,
   } = props;
 
-  const closeButtonProps = {
-    type: 'button',
-    onClick: onFormClose,
-  }
-
-  const usernameInputProps = {
-    type: 'text',
-    name: 'username',
-    required: true,
-  }
-
-  const passwordInputProps = {
-    type: 'password',
-    name: 'password',
-    required: true,
-  }
-
-  const formProps = {
-    onSubmit: onLogin,
-  }
-
   return (
-    <LoginFormView { ...formProps } >
-      <FieldSet disabled={submitting}>
-        <CloseButton { ...closeButtonProps } >x</CloseButton>
-        <FormField>
-          <FormFieldLabel >Username</FormFieldLabel>
-          <FormFieldInput { ...usernameInputProps } />
-        </FormField>
-        <FormField>
-          <FormFieldLabel >Password</FormFieldLabel>
-          <FormFieldInput { ...passwordInputProps } />
-        </FormField>
-        <FormField>
-          <FormButton>Log In</FormButton>
-        </FormField>
-      </FieldSet>
+    <LoginFormView
+      onSubmit={onLogin} >
+
+      <CloseButton
+        type='button'
+        onClick={onFormClose} >x</CloseButton>
+      <FormField>
+        <FormFieldLabel >Username</FormFieldLabel>
+        <FormFieldInput
+          type='text'
+          name='username'
+          required />
+      </FormField>
+      <FormField>
+        <FormFieldLabel >Password</FormFieldLabel>
+        <FormFieldInput
+          type='password'
+          name='password'
+          required />
+      </FormField>
+      <FormField>
+        {
+          submitting &&
+            <LoaderWrapper>
+              <InvertedLoader />
+            </LoaderWrapper>
+        }
+        <FormButton 
+          submitting={submitting} >Log In</FormButton>
+      </FormField>
     </LoginFormView>
   )
 }

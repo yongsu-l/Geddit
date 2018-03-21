@@ -1,3 +1,1 @@
-mysql --user root -p < resetDB.sql
-mysql --user root -p < initDB.sql
-mysql --user root -p < populateDB.sql
+cat resetDB.sql initDB.sql populateDB.sql | mysql --user root -p

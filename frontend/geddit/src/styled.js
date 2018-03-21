@@ -46,12 +46,6 @@ const Form = styled.form`
   animation: fade-in .35s ease-out;
 `
 
-const FieldSet = styled.fieldset`
-  margin: 0;
-  padding: 0;
-  border: 0;
-`
-
 const FormField = styled.div`
   padding: 20px 20px 0 20px;
   width: calc(100% - 40px);
@@ -70,28 +64,28 @@ const FormFieldInput = styled.input`
   border: 1px solid #bbb;
 `
 
-const FormButton = Button.extend`
+const FormButton = Button.extend.attrs({
+  style: ({ submitting }) => ({
+    visibility: submitting ? 'hidden' : 'visible',
+  })
+})`
   float: right;
 `
 
 const Loader = styled.div`
-  position: absolute;
-  top: calc(50% + 30px);
-  left: calc(50% - 15px);
   border: 2px solid #333; 
   border-top: 2px solid #f3f3f3;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   opacity: 0.8;
-  animation: spin 0.5s ease-out infinite;
+  animation: spin 0.5s ease-out infinite, fade-in .5s ease;
 `
 
 export {
   Label,
   Button,
   Form,
-  FieldSet,
   FormField,
   FormFieldLabel,
   FormFieldInput,
