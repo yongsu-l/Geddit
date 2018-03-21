@@ -88,14 +88,16 @@ class Root extends Component {
   }
 
   onToggle(e) {
-    const textContent = e.target.textContent.toLowerCase(),
-          { type } = this.state,
-          { history } = this.props;
+    const textContent = e.target.textContent.toLowerCase();
+    const { type } = this.state;
+    const { history } = this.props;
 
     if (textContent !== type) {
       const { pathname } = history.location;
       history.push(`${pathname}?type=${textContent}&page=1`);
     }
+
+
   }
 
   redirectToPost(id) {
@@ -109,6 +111,9 @@ class Root extends Component {
     this.setState({
       collapsedForm: !this.state.collapsedForm,
     })
+    this.props.setAppState(({ disabledBody }) => ({
+      disabledBody: !disabledBody,
+    }))
   }
 
   onNextPage() {
@@ -208,7 +213,7 @@ class Root extends Component {
                   children={
                     'Start a New Discussion'
                   } />
-              : <PostForm 
+              : <PostForm
                   onPostFormToggle={onPostFormToggle}
                   onPostDiscussion={onPostDiscussion} />
           }
@@ -219,60 +224,3 @@ class Root extends Component {
 }
 
 export default Root;
-
-const feedSample = [
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfs d fsa f a f a s d flasdjflasdlfj asdlfjlasj flajsdklfjasldfasdfas asdfasdfa sfdas fas fa sdfas df asa sasd'
-  },
-  {
-    title: 'Some random Post Titles adfssad fas df sdaf sda fasd f dfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles ad asd fsad f dsf asd fas f asdf asfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfssad fas df sdaf sda fasd f dfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles ad asd fsad f dsf asd fas f asdf asfsdfasd'
-  },
-  {
-    title: 'Some random Post Titles adfsdfasd'
-  },
-]
