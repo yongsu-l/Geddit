@@ -12,6 +12,7 @@ function parseComment(data) {
     datum.comments = [];
 
     idToNodeMap[datum.commentID] = datum;
+    delete datum.commentID;
 
     if (datum.parentID === null) {
       root.push(datum);
@@ -34,7 +35,8 @@ module.exports = {
                     FROM posts NATURAL JOIN users WHERE postID = ? LIMIT 1`, [postID], (err, post_rows, fields) => {
       if (err) throw err;
       if (post_rows.length === 0) return done(null);
-      db.get().query('SELECT * FROM comments where postID = ?', [postID], (err, comment_rows, fields) => {
+      db.get().query(`SELECT commentID, parentID, username, content, dateCreated
+                      FROM comments NATURAL JOIN users where postID = ?`, [postID], (err, comment_rows, fields) => {
         //Add the comments to the post before return
         post = post_rows[0];
         //Iterate through the list to get the child comments into the parent comments

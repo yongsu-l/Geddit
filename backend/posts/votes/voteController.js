@@ -22,7 +22,7 @@ router.put('/', verifyToken, (req, res) => {
   }, (vote) => {
     if (!vote) res.status(400).json({success: false, msg : 'Failed to vote'});
     else res.status(201).json({success: true, msg: 'Vote placed'});
-  })
-})
+  });
+});
 
 module.exports = router;

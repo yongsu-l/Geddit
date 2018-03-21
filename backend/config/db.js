@@ -1,7 +1,8 @@
 // db.js
 
-var mysql = require('mysql');
-var pool  = null
+var mysql   = require('mysql');
+var config  = require('./config');
+var pool    = null
 
 exports.connect = function() {
   pool = mysql.createPool({
