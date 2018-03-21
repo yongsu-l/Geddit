@@ -71,7 +71,7 @@ router.post('/login', (req, res) => {
         success: false,
         msg: "Username does not exist"
       });
-    if (user.password !== req.body.password) {
+    else if (user.password !== req.body.password) {
       res.status(401).json({
         success: false,
         msg: "Username and Password do not match"
