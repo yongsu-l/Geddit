@@ -23,6 +23,7 @@ const BodyView = styled.div`
   position: relative;
   width: 100%;
   height: calc(100% - 50px);
+  background: #eee;
   text-align: left;
   overflow-y: auto;
 `
