@@ -115,7 +115,13 @@ class App extends Component {
                   username={username}
                   { ...props } />
               } />
-            <Route path='/' component={Root} />
+            <Route 
+              path='/' 
+              render={props =>
+                <Root
+                  setAppState={setAppState}
+                  { ...props } />
+              } />
           </Switch>
         </BodyView>
       </AppView>

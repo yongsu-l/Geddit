@@ -3,6 +3,7 @@ import headerBG from 'static/root-header-bg.jpg';
 
 import {
   Form,
+  Label,
   Button,
 } from 'styled';
 
@@ -26,22 +27,44 @@ const FeedView = styled.div`
   overflow-x: hidden;
 `
 
+const PostWrapper = styled.div`
+  display: inline-block;
+  width: calc(100% - 268px);
+  margin: 12px 6px;
+  padding: 6px;
+  border: 1px solid #bbb;
+  `
+  
+const PostTitle = Label.extend`
+  display: inline-block;
+  padding: 0;
+  color: blue;
+  font-size: 12px;
+  text-align: left;
+
+  :hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`
+
 const PostButton = Button.extend`
   font-family: sans-serif;
   font-size: 14px;
   position: relative;
   width: 100%;
-  height: 32px;
+  height: 100%;
   border: 0;
 `
 
 const PostFormView = styled.div.attrs({
   style: ({ collapsedForm }) => ({
-    width: collapsedForm ? 'calc(30% - 16px)' : 'calc(36% - 16px)',
-    height: collapsedForm ? 32 : 'calc(50vh + 112px)',
-    right: collapsedForm ? 'calc(5% + 7px)' : 'calc(2% + 7px)',
+    width: collapsedForm ? 210 : 520,
+    height: collapsedForm ? 31 : 'calc(50vh + 115px)',
+    right: collapsedForm ? 20 : 'calc(50vw - 261px)',
   })
 })`
+  z-index: 100;
   position: absolute;
   top: 112px;
   border: 1px solid #bbb;
@@ -86,8 +109,10 @@ const FormTitle = styled.div`
   width: 100%;
   height: 32px;
   line-height: 32px;
-  color: #333;
+  color: white;
+  background: #666;
   font-size: 14px;
+  font-weight: 200;
   text-align: center;
   border-bottom: 1px solid #bbb;
 `
@@ -136,6 +161,8 @@ const CancelButton = SubmitPostButton.extend`
 export {
   FeedControlView,
   FeedView,
+  PostWrapper,
+  PostTitle,
   PostButton,
   PostFormView,
   PageNavigationView,

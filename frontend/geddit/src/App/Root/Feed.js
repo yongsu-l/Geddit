@@ -3,30 +3,9 @@ import styled from 'styled-components';
 import _ from 'lodash';
 
 import {
-  Label,
-} from 'styled';
-
-const PostWrapper = styled.div`
-  display: inline-block;
-  width: calc(60% - 18px);
-  margin: 12px 6px;
-  padding: 6px;
-  border: 1px solid #bbb;
-  `
-  
-const PostTitle = Label.extend`
-  display: inline-block;
-  padding: 0;
-  color: blue;
-  font-size: 12px;
-  text-align: left;
-
-  :hover {
-    cursor: pointer;
-    text-decoration: underline;
-  }
-`
-
+  PostWrapper,
+  PostTitle,
+} from './styled';
 
 const Feed = ({ feed, redirectToPost }) => {
   const renderPost = (post, index) => {
