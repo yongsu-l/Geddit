@@ -13,7 +13,7 @@ router.use(bodyParser.json());
 
 const query = require('./comment');
 
-router.put('/', verifyToken, (req, res) => {
+router.post('/', verifyToken, (req, res) => {
   if (!req.body.content || !req.body.postID)
     res.status(400).json({success: false, msg: 'Must provide comment and postID'});
   query.makeComment({
@@ -25,7 +25,6 @@ router.put('/', verifyToken, (req, res) => {
     if (!newComment) res.status(400).json({success: false, msg : 'Failed to make comment'});
     else res.status(201).json({success: true, newComment});
   })
-  
 })
 
 module.exports = router;
