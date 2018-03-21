@@ -12,7 +12,6 @@ function parseComment(data) {
     datum.comments = [];
 
     idToNodeMap[datum.commentID] = datum;
-    delete datum.commentID;
 
     if (datum.parentID === null) {
       root.push(datum);
