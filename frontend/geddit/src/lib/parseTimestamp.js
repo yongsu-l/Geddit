@@ -6,7 +6,7 @@ function parseTimestamp(timestamp) {
 
   return {
     date: `${date[1]} ${date[2]}, ${date[3]}`,
-    time: `${time[0]}:${time[1]}`, 
+    time: `${parseInt(time[0], 10) % 12}:${time[1]}${time[0] >= 12 ? 'pm' : 'am'}`, 
   }
 }
 
