@@ -77,9 +77,8 @@ class Root extends Component {
               this.setState({
                 feed: json.posts,
               })
-            } else {
-              console.log('error');
             }
+            console.log(json);
           })
       }
     } else {
@@ -149,17 +148,30 @@ class Root extends Component {
     const content = e.target.content.value;
     const token = window.localStorage.getItem('token');
 
+    const {
+      loadApp,
+      history,
+    } = this.props;
+
     postDiscussion(token, {
       title,
       content,
     })
       .then(json => {
-        // redirect to post
+        // redirect to post        
         if (json && json.success) {
-          this.props.history.push('/post?id=' + json.id);
-        } else {
-          // failed to create post
+          loadApp(1333);          
+          setTimeout(() => {
+            history.push('/post?id=' + json.postID);
+          }, 200);
         }
+        this.props.setAppState(({ disabledBody }) => ({
+          disabledBody: false,
+        }))
+        this.setState({
+          collapsedForm: true,
+        })
+        console.log(json);
       })
   }
 
