@@ -1,7 +1,7 @@
 function postComment({ token, postID, parentID=null, content }) {
   return (
     fetch('/post/comment', {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': token,
