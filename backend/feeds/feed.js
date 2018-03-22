@@ -18,5 +18,10 @@ module.exports = {
       if (err) throw err;
       done(rows);
     });
+  },
+  getPostCount(done) {
+    db.get().query('SELECT COUNT(*) as totalCount FROM posts', (err, rows, field) => {
+      done(rows[0].totalCount);
+    })
   }
 };
