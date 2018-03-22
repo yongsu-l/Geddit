@@ -27,7 +27,7 @@ class Comment extends Component {
     this.state = {
       collapsed: true,
       visibleReplyBox: false,
-      comments: props.comment.comments,
+      comments: props.comment.comments || [],
     }
 
     this.onUncollapse = this.onUncollapse.bind(this);
@@ -49,13 +49,14 @@ class Comment extends Component {
 
   onReplyComment(e) {
     e.preventDefault();
+    e.persist();
     const { 
       history,
       comment,
       postID,
     } = this.props;
 
-    const content = e.target.content.value;
+    const content = e.target.comment.value;
     const token = window.localStorage.getItem('token');
 
     postComment({
@@ -74,6 +75,7 @@ class Comment extends Component {
           })
           this.onUncollapse();
           this.onReplyToggle();
+          e.target.comment.value = '';
         }
         console.log(json);
       })
@@ -120,7 +122,7 @@ class Comment extends Component {
             {
               comments.length > 0 && collapsed &&
               <CommentCount
-                onClick={onUncollapse} >{comments.length} comment{s}</CommentCount>
+                onClick={onUncollapse} >{ comments.length } comment{ s }</CommentCount>
             }
           </CountWrapper>
         </CommentWrapper>
@@ -130,7 +132,7 @@ class Comment extends Component {
             visible={visibleReplyBox} >
             <ReplyBox 
               type='text'
-              name='content'
+              name='comment'
               required />
             <CancelButton
               type='button'
