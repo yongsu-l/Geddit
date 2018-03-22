@@ -120,6 +120,7 @@ class App extends Component {
               render={props =>
                 <Root
                   setAppState={setAppState}
+                  loadApp={loadApp}
                   { ...props } />
               } />
           </Switch>

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 function parseTimestamp(timestamp) {
-  const date = _.split(Date(timestamp), ' ');
+  const date = _.split(new Date(timestamp), ' ');
   const time = _.split(date[4], ':');
 
   return {

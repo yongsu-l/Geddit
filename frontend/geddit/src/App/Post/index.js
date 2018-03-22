@@ -71,6 +71,7 @@ class Post extends Component {
 
   onCommentPost(e) {
     e.preventDefault();
+    e.persist();    
 
     const token = window.localStorage.getItem('token');
     const content = e.target.comment.value;
@@ -92,6 +93,7 @@ class Post extends Component {
             }
           })
         }
+        e.target.comment.textContent = '';        
         console.log(json);
       })
   }
@@ -193,16 +195,14 @@ class Post extends Component {
               style={{
                 color: 'white',
                 fontWeight: 400,
-              }} >Comments</div>
+              }} >{ comments.length === 0 && 'No ' }Comments</div>
             { 
-              (comments.length > 0)
-                ? _.map(comments, (comment, id) =>
-                    <Comment
-                      comment={comment}
-                      key={id}
-                      postID={postID} />
-                  )
-                : <div>No Comments</div>
+              _.map(comments, (comment, id) =>
+                <Comment
+                  comment={comment}
+                  key={id}
+                  postID={postID} />
+              )
             }
           </CommentView>
         </PostBG>

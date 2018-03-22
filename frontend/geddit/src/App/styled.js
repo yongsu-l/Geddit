@@ -52,6 +52,10 @@ const LoadingView = styled.div`
   background-size: auto auto;
   background-repeat: no-repeat;
   background-position: center;
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
 `
 
 const LoaderWrapper = styled.div`
