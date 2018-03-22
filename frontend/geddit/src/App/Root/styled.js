@@ -64,27 +64,27 @@ const PostFormView = styled.div.attrs({
     right: collapsedForm ? 20 : 'calc(50vw - 261px)',
   })
 })`
-  z-index: 100;
+  z-index: 99;
   position: absolute;
   top: 112px;
   border: 1px solid #bbb;
   overflow: hidden;
   -webkit-transition:
-    width .75s ease,
-    height .75s ease,
-    right .75s ease;
+    width .3s ease,
+    height .3s ease,
+    right .3s ease;
   -moz-transition:
-    width .75s ease,
-    height .75s ease,
-    right .75s ease;
+    width .3s ease,
+    height .3s ease,
+    right .3s ease;
   -o-transition:
-    width .75s ease,
-    height .75s ease,
-    right .75s ease;
+    width .3s ease,
+    height .3s ease,
+    right .3s ease;
   transition:
-    width .75s ease,
-    height .75s ease,
-    right .75s ease;
+    width .3s ease,
+    height .3s ease,
+    right .3s ease;
 `
 
 const PageNavigationView = styled.div`
