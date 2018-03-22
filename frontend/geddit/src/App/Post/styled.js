@@ -38,10 +38,8 @@ const TitleLabel = styled.label`
   display: block;
   color: #333;
   font-size: 24px;
-  width: calc(100% - 100px);
-  height: 42px;
-  line-height: 42px;
-  margin: 6px 0;
+  width: calc(100% - 150px);
+  line-height: 28px;
   font-weight: normal;
 `
 
