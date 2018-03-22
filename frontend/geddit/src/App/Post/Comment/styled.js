@@ -86,7 +86,7 @@ const ReplyContainer = styled.div.attrs({
 const ReplyBox = styled.textarea`
   background: white;
   resize: none;
-  width: calc(100% - 48px);
+  width: calc(100% - 24px);
   height: 36px;
   padding: 6px 12px;
   border: 0;
@@ -97,15 +97,17 @@ const ReplyBox = styled.textarea`
 `
 
 const ReplyButton = styled.button`
-  width: 100%;
+  display: inline-block;
+  width: calc(100% - 76px);
   background: #777;
   color: white;
   border: 0;
-  border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   height: 24px;
   line-height: 24px;
   font-weight: 400;
+  padding: 0;
+  margin-left: 4px;
   outline: none;
 
   :hover {
@@ -118,13 +120,11 @@ const ReplyButton = styled.button`
 `
 
 const CancelButton = ReplyButton.extend`
-  width: 24px;
-  display: inline-block;
-  height: 48px;
   color: red;
+  width: 72px;
   border-radius: 0;
-  background: #bbb;
-  vertical-align: top;
+  border-bottom-left-radius: 8px;  
+  margin: 0;
 `
 
 export {
