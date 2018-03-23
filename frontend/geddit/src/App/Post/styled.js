@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import BG from 'static/post-bg.jpg';
 
 import {
   Button,
@@ -10,16 +9,12 @@ const PostBG = styled.div`
   width: 100%;
   min-height: calc(100% - 24px);
   padding-top: 24px;
-  background: url(${BG});
-  background-size: cover;
-  background-position: right bottom;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: #333;
 `
 
 const PostContainer = styled.div`
   background: white;
-  max-width: 600px;
+  max-width: 720px;
   margin: auto;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -29,7 +24,7 @@ const PostContainer = styled.div`
 const PostView = styled.div`
   position: relative;
   width: calc(100% - 24px);
-  max-width: 600px;
+  max-width: 720px;
   padding: 6px 12px;
   margin: auto;
 `
@@ -125,7 +120,7 @@ const ControlButton = Button.extend`
 
 const CommentView = styled.div`
   width: calc(100% - 32px);
-  max-width: 600px;  
+  max-width: 720px;  
   margin: auto;
   padding-bottom: 60px;
   padding-top: 18px;

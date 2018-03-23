@@ -43,8 +43,6 @@ const SelectedPageButton = PageButton.extend`
 `
 
 const NextButton = PageButton.extend`
-  position: absolute;
-  left: 320px;
   width: auto;
   padding: 0 6px;
 `
@@ -68,6 +66,7 @@ const PageNavigation = props => {
       upperBound = numPage;
       lowerBound = upperBound - 7;
     }
+    lowerBound = lowerBound >= 1 ? lowerBound : 1;    
 
     const pageIndices = _.range(lowerBound, upperBound+1);
 
