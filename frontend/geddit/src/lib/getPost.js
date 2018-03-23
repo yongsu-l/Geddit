@@ -1,6 +1,6 @@
 function getPost(id) {
   return (
-    fetch(`/post?id=${id}`)
+    fetch(`http://localhost:3001/post?id=${id}`)
       .then(res => res.json())
       .catch(e => console.log(e))
   )

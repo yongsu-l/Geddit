@@ -1,6 +1,6 @@
 function getAuthorization(token) {
   return (
-    fetch('/user/authorize', {
+    fetch('http://localhost:3001/user/authorize', {
       method: 'GET',
       headers: {
         'x-access-token': token,
