@@ -14,7 +14,7 @@ app.get('/', (req, res) => res.send('Welcome to Geddit REST API'));
 
 app.all('*', function(req, res, next) {
        var origin = req.get('origin'); 
-       res.header('Access-Control-Allow-Origin', "http://localhost:80");
+       res.header('Access-Control-Allow-Origin', "http://18.217.251.35:80");
        res.header("Access-Control-Allow-Headers", "X-Requested-With");
        res.header('Access-Control-Allow-Headers', 'Content-Type, x-access-token');
        res.header('Acess-Control-Allow-Methods', 'PUT');
