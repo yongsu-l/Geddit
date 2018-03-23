@@ -21,10 +21,7 @@ const FeedView = styled.div`
   display: block;
   position: relative;
   width: 100%;
-  height: calc(100% - 150px);
   background: white;
-  overflow-y: auto;
-  overflow-x: hidden;
 `
 
 const PostWrapper = styled.div`

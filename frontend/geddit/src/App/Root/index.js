@@ -25,7 +25,7 @@ class Root extends Component {
     this.state = {
       type: null,
       page: null,
-      numPage: 16,
+      numPage: 0,
       feed: [],
       collapsedForm: true,
     }
@@ -76,6 +76,7 @@ class Root extends Component {
             if (json && json.success) {
               this.setState({
                 feed: json.posts,
+                numPage: parseInt(json.postCount/20, 10) + 1,
               })
             }
             console.log(json);
