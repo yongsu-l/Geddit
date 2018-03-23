@@ -1,6 +1,6 @@
 function postComment({ token, postID, parentID=null, content }) {
   return (
-    fetch('/post/comment', {
+    fetch('http://localhost:3001/post/comment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

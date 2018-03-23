@@ -1,6 +1,6 @@
 function putUpvote({ token, postID, upvote }) {
   return (
-    fetch('/post/vote', {
+    fetch('http://localhost:3001/post/vote', {
       method: 'PUT',
       headers: {
         'x-access-token': token,

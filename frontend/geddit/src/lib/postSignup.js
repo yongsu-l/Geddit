@@ -1,6 +1,6 @@
 function postSignup(body) {
   return (
-    fetch('/user/create', {
+    fetch('http://localhost:3001/user/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

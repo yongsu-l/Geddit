@@ -1,6 +1,6 @@
 function postDiscussion(token, body) {
   return (
-    fetch('/user/post/create', {
+    fetch('http://localhost:3001/user/post/create', {
       method: 'POST',
       headers: {
         'x-access-token': token,
