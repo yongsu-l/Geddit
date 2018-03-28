@@ -6,11 +6,13 @@ const app         = require('express')();
 const bodyParser  = require('body-parser');
 const colors      = require('colors');
 const db          = require('./db');
+const cors        = require('cors');
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('Welcome to Geddit REST API'));
+app.use(cors());
 
 //API Routes 
 const user = require('../users');
