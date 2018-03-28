@@ -9,7 +9,7 @@ const AppView = styled.div`
   position: relative;
   overflow: hidden;
   transition: width .33s ease, height .33s ease;  
-`
+`;
 
 const HeaderView = styled.div`
   display: block;
@@ -18,7 +18,7 @@ const HeaderView = styled.div`
   height: 50px;
   vertical-align: middle;
   background: #f7f7f7;
-`
+`;
 
 const BodyView = styled.div`
   display: block;
@@ -28,7 +28,7 @@ const BodyView = styled.div`
   background: #eee;
   text-align: left;
   overflow-y: auto;
-`
+`;
 
 const Mask = styled.div`
   z-index: 99;
@@ -40,7 +40,7 @@ const Mask = styled.div`
   -moz-animation: fade-in .3s ease;
   -o-animation: fade-in .3s ease;
   animation: fade-in .3s ease;
-`
+`;
 
 const LoadingView = styled.div`
   z-index: 999999;
@@ -58,7 +58,7 @@ const LoadingView = styled.div`
   -moz-animation: none;
   -o-animation: none;
   animation: none;
-`
+`;
 
 const LoaderWrapper = styled.div`
   position: absolute;
@@ -66,7 +66,7 @@ const LoaderWrapper = styled.div`
   left: calc(50% - 15px);
   width: 30px;
   height: 30px;
-`
+`;
 
 export {
   AppView,
@@ -75,4 +75,4 @@ export {
   Mask,
   LoadingView,
   LoaderWrapper,
-}
+};

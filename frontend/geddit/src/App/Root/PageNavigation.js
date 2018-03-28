@@ -16,7 +16,7 @@ const PageButton = Button.extend`
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-`
+`;
 
 const SelectedPageButton = PageButton.extend`
   marginLeft: calc(50vw - 15px);
@@ -40,12 +40,12 @@ const SelectedPageButton = PageButton.extend`
     background: #333;
     cursor: default;
   }
-`
+`;
 
 const NextButton = PageButton.extend`
   width: auto;
   padding: 0 6px;
-`
+`;
 
 const PageNavigation = props => {
   const {
@@ -77,8 +77,8 @@ const PageNavigation = props => {
         : <PageButton
             onClick={onGoToPage}
             key={page} >{ page }</PageButton>
-    )
-  }
+    );
+  };
 
   return (
     <Fragment>
@@ -86,7 +86,7 @@ const PageNavigation = props => {
       <NextButton
         onClick={onNextPage} >Next</NextButton>
     </Fragment>
-  )
-}
+  );
+};
 
 export default PageNavigation;

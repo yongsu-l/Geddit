@@ -14,7 +14,7 @@ function postComment({ token, postID, parentID=null, content }) {
     })
       .then(res => res.json())
       .catch(e => console.log(e))
-  )
+  );
 }
 
 export default postComment;

@@ -14,23 +14,23 @@ const LogoLabel = Label.extend`
   :hover {
     cursor: pointer;
   }
-`
+`;
 
 const ControlButton = Button.extend`
   float: right;
   margin: 10px 10px 10px 0;
   background: #f7f7f7;  
-`
+`;
 
 const FloatRightLabel = LogoLabel.extend`
   float: right;
   font-size: 14px;
-`
+`;
 
 const UsernameLabel = FloatRightLabel.extend`
   font-size: 12px;
   color: #E65100;
-`
+`;
 
 const LogoutLabel = FloatRightLabel.extend`
   font-size: 12px;
@@ -43,7 +43,7 @@ const LogoutLabel = FloatRightLabel.extend`
   :active {
     color: #E65100;
   }
-`
+`;
 
 const LoginFormView = Form.extend`
   z-index: 100;
@@ -53,7 +53,7 @@ const LoginFormView = Form.extend`
   width: 264px;
   background: white;
   border-top: 0;
-`
+`;
 
 
 const SignupFormView = Form.extend`
@@ -64,7 +64,7 @@ const SignupFormView = Form.extend`
   width: 264px;
   background: white;
   border-top: 0;
-`
+`;
 
 const CloseButton = Button.extend`
   float: right;
@@ -75,7 +75,7 @@ const CloseButton = Button.extend`
     background: transparent;
     font-weight: 400;
   }
-`
+`;
 
 const LoaderWrapper = styled.div`
   position: absolute;
@@ -83,11 +83,11 @@ const LoaderWrapper = styled.div`
   bottom: 22px;
   width: 30px;
   height: 30px;
-`
+`;
 
 const InvertedLoader = Loader.extend`
   filter: invert(100%);
-`
+`;
 
 export {
   LogoLabel,
@@ -100,4 +100,4 @@ export {
   CloseButton,
   LoaderWrapper,
   InvertedLoader,
-}
+};

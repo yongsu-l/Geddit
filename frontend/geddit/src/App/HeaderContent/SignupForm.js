@@ -67,7 +67,7 @@ const SignupForm = props => {
           submitting={submitting} >Sign Up</FormButton>
       </FormField>
     </SignupFormView>
-  )
-}
+  );
+};
 
 export default SignupForm;

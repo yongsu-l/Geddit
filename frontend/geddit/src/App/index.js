@@ -29,7 +29,7 @@ class App extends Component {
     this.state = {
       username: null,
       disabledBody: false,
-    }
+    };
 
     this.setAppState = this.setAppState.bind(this);
     this.loadApp = this.loadApp.bind(this);
@@ -53,7 +53,7 @@ class App extends Component {
         default:
           history.push('/' + history.location.search);
       }
-    }
+    };
 
     if (token) {
       getAuthorization(token)
@@ -61,12 +61,12 @@ class App extends Component {
           if (json && json.success) {
             this.setState({
               username: json.username,
-            })
+            });
           } else {
             redirect(history.location.pathname);
           }
           exec();
-        })
+        });
     } else {
       redirect(history.location.pathname); 
       exec();
@@ -135,7 +135,7 @@ const AppLoader = props =>
     <LoaderWrapper>
       <Loader />
     </LoaderWrapper>
-  </LoadingView>
+  </LoadingView>;
 
 export default withRouter(withLoader({
   Component: App,

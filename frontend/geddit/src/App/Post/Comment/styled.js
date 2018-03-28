@@ -4,7 +4,7 @@ const CommentContainer = styled.div`
   position: relative;
   width: calc(100% - 16px);
   margin: 12px 0 0 16px;
-`
+`;
 
 const CommentWrapper = styled.div`
   color: #555;
@@ -14,17 +14,17 @@ const CommentWrapper = styled.div`
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-`
+`;
 
 const CommentP = styled.p`
   margin: 0;
   color: black;
-`
+`;
 
 const CountWrapper = styled.div`
   height: 14px;
   margin-top: 6px;
-`
+`;
 
 const CommentCount = styled.label`
   display: inline-block;
@@ -35,7 +35,7 @@ const CommentCount = styled.label`
     cursor: pointer;
     text-decoration: underline;
   }
-`
+`;
 
 const ReplyLabel = styled.label`
   display: inline-block;
@@ -47,14 +47,14 @@ const ReplyLabel = styled.label`
     cursor: pointer;
     text-decoration: underline;
   }
-` 
+`; 
 
 const DateLabel = styled.label`
   position: absolute;
   top: 11px;
   right: 12px;
   font-size: 11px;
-`
+`;
 
 const HandleLabel = styled.label`
   display: inline-block;
@@ -64,7 +64,7 @@ const HandleLabel = styled.label`
   text-align: right;
   float: right;
   margin-right: 12px;
-`
+`;
 
 const ReplyContainer = styled.div.attrs({
   style: ({ visible }) => ({
@@ -81,7 +81,7 @@ const ReplyContainer = styled.div.attrs({
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-`
+`;
   
 const ReplyBox = styled.textarea`
   background: white;
@@ -94,7 +94,7 @@ const ReplyBox = styled.textarea`
   font-weight: 100;
   font-size: 12px;
   font-family: san-serif;
-`
+`;
 
 const ReplyButton = styled.button`
   display: inline-block;
@@ -117,7 +117,7 @@ const ReplyButton = styled.button`
   :active {
     background: #333;
   }
-`
+`;
 
 const CancelButton = ReplyButton.extend`
   color: red;
@@ -125,7 +125,7 @@ const CancelButton = ReplyButton.extend`
   border-radius: 0;
   border-bottom-left-radius: 8px;  
   margin: 0;
-`
+`;
 
 export {
   CommentContainer,
@@ -140,4 +140,4 @@ export {
   ReplyBox,
   ReplyButton,
   CancelButton,
-}
+};

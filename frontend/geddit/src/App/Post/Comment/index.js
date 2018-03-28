@@ -28,7 +28,7 @@ class Comment extends Component {
       collapsed: true,
       visibleReplyBox: false,
       comments: props.comment.comments || [],
-    }
+    };
 
     this.onUncollapse = this.onUncollapse.bind(this);
     this.onReplyToggle = this.onReplyToggle.bind(this);
@@ -38,13 +38,13 @@ class Comment extends Component {
   onUncollapse() {
     this.setState({
       collapsed: false,
-    })
+    });
   }
 
   onReplyToggle() {
     this.setState(({ visibleReplyBox }) => ({
       visibleReplyBox: !visibleReplyBox,
-    }))
+    }));
   }
 
   onReplyComment(e) {
@@ -71,14 +71,14 @@ class Comment extends Component {
             comments.push(json.newComment);
             return {
               comments,
-            }
-          })
+            };
+          });
           this.onUncollapse();
           this.onReplyToggle();
           e.target.comment.value = '';
         }
         console.log(json);
-      })
+      });
   }
 
   render() {
@@ -151,7 +151,7 @@ class Comment extends Component {
             />)
         }
       </CommentContainer>      
-    )
+    );
   }
 }
 

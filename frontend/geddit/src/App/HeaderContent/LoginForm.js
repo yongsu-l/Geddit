@@ -53,7 +53,7 @@ const LoginForm = props => {
           submitting={submitting} >Log In</FormButton>
       </FormField>
     </LoginFormView>
-  )
-}
+  );
+};
 
 export default LoginForm;

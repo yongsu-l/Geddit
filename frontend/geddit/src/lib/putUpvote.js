@@ -13,7 +13,7 @@ function putUpvote({ token, postID, upvote }) {
     })
       .then(res => res.json())
       .catch(e => console.log(e))
-  )
+  );
 }
 
 export default putUpvote;

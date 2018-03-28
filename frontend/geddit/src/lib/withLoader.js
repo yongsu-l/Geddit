@@ -7,7 +7,7 @@ function withLoader({ Component, Loader }) {
 
       this.state = {
         loading: true,
-      }
+      };
 
       this.load = this.load.bind(this);
       this.show = this.show.bind(this);
@@ -16,7 +16,7 @@ function withLoader({ Component, Loader }) {
     componentWillMount() {}
     componentDidMount() {}
     componentWillReceiveProps() {}
-    shouldComponentUpdate() { return true }
+    shouldComponentUpdate() { return true; }
     componentWIllUpdate() {}
     componentDidUpdate() {}
     componentWillUnmount() {}
@@ -45,9 +45,9 @@ function withLoader({ Component, Loader }) {
             <Loader />
           }
         </Fragment>
-      )
+      );
     }
-  }
+  };
 }
 
 export default withLoader;

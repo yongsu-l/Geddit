@@ -42,7 +42,7 @@ const PostForm = props => {
         onClick={onPostFormToggle}>Cancel</CancelButton>
         
     </DiscussionForm>
-  )
-}
+  );
+};
 
 export default PostForm;

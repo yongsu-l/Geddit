@@ -15,14 +15,14 @@ const FeedControlView = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center 25%;
-`
+`;
 
 const FeedView = styled.div`
   display: block;
   position: relative;
   width: 100%;
   background: white;
-`
+`;
 
 const PostWrapper = styled.div`
   display: block;
@@ -30,7 +30,7 @@ const PostWrapper = styled.div`
   margin: 12px 6px;
   padding: 6px;
   border: 1px solid #bbb;
-  `
+  `;
   
 const PostTitle = Label.extend`
   display: inline-block;
@@ -43,7 +43,7 @@ const PostTitle = Label.extend`
     cursor: pointer;
     text-decoration: underline;
   }
-`
+`;
 
 const PostButton = Button.extend`
   font-family: sans-serif;
@@ -52,7 +52,7 @@ const PostButton = Button.extend`
   width: 100%;
   height: 100%;
   border: 0;
-`
+`;
 
 const PostFormView = styled.div.attrs({
   style: ({ collapsedForm }) => ({
@@ -82,7 +82,7 @@ const PostFormView = styled.div.attrs({
     width .3s ease,
     height .3s ease,
     right .3s ease;
-`
+`;
 
 const PageNavigationView = styled.div`
   display: block;
@@ -91,7 +91,7 @@ const PageNavigationView = styled.div`
   height: 50px;
   text-align: left;
   background: #eee;
-`
+`;
 
 const DiscussionForm = Form.extend`
   position: relative;
@@ -99,7 +99,7 @@ const DiscussionForm = Form.extend`
   height: 100%;
   padding: 0;
   border: 0;
-`
+`;
 
 const FormTitle = styled.div`
   position: relative;
@@ -112,7 +112,7 @@ const FormTitle = styled.div`
   font-weight: 200;
   text-align: center;
   border-bottom: 1px solid #bbb;
-`
+`;
 
 const TitleInput = styled.input`
   width: calc(100% - 12px);
@@ -124,7 +124,7 @@ const TitleInput = styled.input`
   padding: 6px;
   font-size: 12px;
   outline: none;
-`
+`;
 
 const ContentTextArea = styled.textarea`
   width: calc(100% - 12px);
@@ -138,7 +138,7 @@ const ContentTextArea = styled.textarea`
   font-family: san-serif;
   outline: none;
   resize: none;
-`
+`;
 
 const SubmitPostButton = Button.extend`
   float: right;
@@ -147,13 +147,13 @@ const SubmitPostButton = Button.extend`
   margin-top: -4px;
   border: 0;
   border-left: 1px solid #bbb;
-`
+`;
 
 const CancelButton = SubmitPostButton.extend`
   width: 30%;
   border: 0;
   color: red;
-`
+`;
 
 export {
   FeedControlView,
@@ -169,4 +169,4 @@ export {
   ContentTextArea,
   SubmitPostButton,
   CancelButton,
-}
+};

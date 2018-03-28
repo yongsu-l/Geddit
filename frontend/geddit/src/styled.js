@@ -8,7 +8,7 @@ const Label = styled.label`
   text-align: center;
   background: white;
   color: #333;
-`
+`;
 
 const Button = styled.button`
   display: inline-block;
@@ -33,7 +33,7 @@ const Button = styled.button`
     color: white;
     background: #555;
   }
-`
+`;
 
 const Form = styled.form`
   border: 1px solid #bbb;
@@ -44,25 +44,25 @@ const Form = styled.form`
   -moz-animation: fade-in .35s ease-out;
   -o-animation: fade-in .35s ease-out;
   animation: fade-in .35s ease-out;
-`
+`;
 
 const FormField = styled.div`
   padding: 20px 20px 0 20px;
   width: calc(100% - 40px);
   text-align: left;
-`
+`;
 
 const FormFieldLabel = Label.extend`
   font-size: 12px;
   padding: 0;
-`
+`;
 
 const FormFieldInput = styled.input`
   width: calc(100% - 10px);
   height: 18px;
   padding: 4px;
   border: 1px solid #bbb;
-`
+`;
 
 const FormButton = Button.extend.attrs({
   style: ({ submitting }) => ({
@@ -70,7 +70,7 @@ const FormButton = Button.extend.attrs({
   })
 })`
   float: right;
-`
+`;
 
 const Loader = styled.div`
   border: 2px solid #333; 
@@ -80,7 +80,7 @@ const Loader = styled.div`
   height: 30px;
   opacity: 0.8;
   animation: spin 0.5s ease-out infinite, fade-in .5s ease;
-`
+`;
 
 export {
   Label,
@@ -91,4 +91,4 @@ export {
   FormFieldInput,
   FormButton,
   Loader,
-}
+};

@@ -3,7 +3,7 @@ function setTimeoutOrUntilExec(func, timeout) {
   const check = () => {
     if (state) func();
     else state = true;
-  }
+  };
   
   setTimeout(check, timeout);
   return check;

@@ -28,7 +28,7 @@ class Root extends Component {
       numPage: 0,
       feed: [],
       collapsedForm: true,
-    }
+    };
 
     this.onToggle = this.onToggle.bind(this);
     this.onPostFormToggle = this.onPostFormToggle.bind(this);
@@ -40,11 +40,11 @@ class Root extends Component {
   }
 
   componentDidMount() {
-    const { history } = this.props
+    const { history } = this.props;
     
     this.removeHistoryListener = history.listen(location => {
       this.loadFeed(location.search);
-    })
+    });
 
     this.loadFeed(history.location.search);
   }
@@ -66,7 +66,7 @@ class Root extends Component {
         this.setState({
           type,
           page,
-        })
+        });
         
         getFeed({
           type,
@@ -76,11 +76,11 @@ class Root extends Component {
             if (json && json.success) {
               this.setState({
                 feed: json.posts,
-                numPage: parseInt(json.postCount/20, 10) + 1,
-              })
+                numPage: parseInt((json.postCount - 1)/20, 10) + 1,
+              });
             }
             console.log(json);
-          })
+          });
       }
     } else {
       history.push(history.location.pathname);
@@ -103,17 +103,17 @@ class Root extends Component {
   redirectToPost(id) {
     const { history } = this.props;
     return () => {
-      history.push(`/post?id=${id}`)
-    }
+      history.push(`/post?id=${id}`);
+    };
   }
 
   onPostFormToggle() {
     this.setState({
       collapsedForm: !this.state.collapsedForm,
-    })
+    });
     this.props.setAppState(({ disabledBody }) => ({
       disabledBody: !disabledBody,
-    }))
+    }));
   }
 
   onNextPage() {
@@ -168,12 +168,12 @@ class Root extends Component {
         }
         this.props.setAppState(({ disabledBody }) => ({
           disabledBody: false,
-        }))
+        }));
         this.setState({
           collapsedForm: true,
-        })
+        });
         console.log(json);
-      })
+      });
   }
 
   render() {
@@ -232,7 +232,7 @@ class Root extends Component {
           }
         </PostFormView>
       </Fragment>
-    )
+    );
   }
 }
 

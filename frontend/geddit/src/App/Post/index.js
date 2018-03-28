@@ -34,7 +34,7 @@ class Post extends Component {
       post: null,
       comments: null,
       visibleCommentBox: false,
-    }
+    };
 
     this.onToggleCommentBox = this.onToggleCommentBox.bind(this);
     this.onCommentPost = this.onCommentPost.bind(this);
@@ -52,21 +52,21 @@ class Post extends Component {
             this.setState({
               post: json.post,
               comments: json.post.comments,
-            })
+            });
           } else {
             history.push('/');
           }
           console.log(json);
-        })
+        });
     } else {
-      history.push('/')
+      history.push('/');
     }
   }
 
   onToggleCommentBox() {
     this.setState(state => ({
       visibleCommentBox: !state.visibleCommentBox,
-    }))
+    }));
   }
 
   onCommentPost(e) {
@@ -90,12 +90,12 @@ class Post extends Component {
             return {
               comments,
               visibleCommentBox: false,
-            }
-          })
+            };
+          });
         }
         e.target.comment.textContent = '';        
         console.log(json);
-      })
+      });
   }
 
   onUpvote(e) {
@@ -114,11 +114,11 @@ class Post extends Component {
             post.votes++;
             return {
               post,
-            }
-          })
+            };
+          });
         }
         console.log(json);
-      })
+      });
   }
 
   render() {
@@ -207,7 +207,7 @@ class Post extends Component {
           </CommentView>
         </PostBG>
         
-    )
+    );
   }
 }
 
@@ -292,4 +292,4 @@ const commentSamples = [
       }
     ]
   }
-]
+];

@@ -20,14 +20,14 @@ const Feed = ({ feed, redirectToPost }) => {
         <div style={{fontSize: 10, display:'inline-block', marginLeft: 10}}>report</div>
         </div>
       </PostWrapper>
-    )
-  }
+    );
+  };
 
   return (
     <Fragment>
       { _.map(feed, renderPost) }
     </Fragment>
-  )
-}
+  );
+};
 
 export default Feed;

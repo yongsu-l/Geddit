@@ -10,7 +10,7 @@ const PostBG = styled.div`
   min-height: calc(100% - 24px);
   padding-top: 24px;
   background: #333;
-`
+`;
 
 const PostContainer = styled.div`
 
@@ -20,7 +20,7 @@ const PostContainer = styled.div`
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   border-bottom-left-radius: 12px;
-`
+`;
 
 const PostView = styled.div`
   position: relative;
@@ -28,7 +28,7 @@ const PostView = styled.div`
   max-width: 1080px;
   padding: 6px 12px;
   margin: auto;
-`
+`;
 
 const TitleLabel = styled.label`
   display: block;
@@ -37,7 +37,7 @@ const TitleLabel = styled.label`
   width: calc(100% - 150px);
   line-height: 28px;
   font-weight: normal;
-`
+`;
 
 const ContentP = styled.p`
   margin: 24px 0 0 36px;
@@ -45,25 +45,25 @@ const ContentP = styled.p`
   color: black;
   background: #ddd;
   font-size: 12px;
-`
+`;
 
 const DateLabel = styled.label`
   position: absolute;
   top: 12px;
   right: 12px;
   font-size: 11px;
-`
+`;
 
 const TimeLabel = DateLabel.extend`
   top: 28px;
   font-size: 11px;  
-`
+`;
 
 const HandleLabel = DateLabel.extend`
   top: 44px;
   color: blue;
   font-size: 11px;
-`
+`;
 
 const VoteCount = styled.div.attrs({
   style: ({ votes }) => ({
@@ -77,7 +77,7 @@ const VoteCount = styled.div.attrs({
   font-size: 12px;
   margin: 0 6px;
   vertical-align: top;
-`
+`;
 
 const VoteButton = styled.i.attrs({
   className: 'material-icons',
@@ -96,7 +96,7 @@ const VoteButton = styled.i.attrs({
     font-size: 18px;
     cursor: pointer;
   }
-`
+`;
 
 const Control = styled.div.attrs({
   style: ({ visibleCommentBox }) => ({
@@ -111,13 +111,13 @@ const Control = styled.div.attrs({
   padding: 6px 12px 6px 48px;
   transition: all 0.3s ease;
   overflow: hidden;
-`
+`;
 
 const ControlButton = Button.extend`
   float: right;
   margin-left: 12px;
   font-size: 11px;
-`
+`;
 
 const CommentView = styled.div`
   width: calc(100% - 32px);
@@ -125,7 +125,7 @@ const CommentView = styled.div`
   margin: auto;
   padding-bottom: 60px;
   padding-top: 18px;
-`
+`;
 
 const CommentBox = styled.textarea`
   float: right;
@@ -138,7 +138,7 @@ const CommentBox = styled.textarea`
   font-size: 12px;
   resize: none;
   outline: none;
-`
+`;
 
 export {
   PostBG,
@@ -155,4 +155,4 @@ export {
   ControlButton,
   CommentView,
   CommentBox,
-}
+};

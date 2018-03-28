@@ -32,7 +32,7 @@ const ToggleButton = Button.extend.attrs({
     background: #333;
     border-color: #333;
   }
-`
+`;
 
 const FeedControl = props => {
   const { 
@@ -50,7 +50,7 @@ const FeedControl = props => {
         onClick={onToggle}
         toggled={type === 'top'} >Top</ToggleButton>
     </Fragment>
-  )
-}
+  );
+};
 
 export default FeedControl;

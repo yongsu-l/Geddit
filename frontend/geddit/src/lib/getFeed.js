@@ -5,7 +5,7 @@ function getFeed(params) {
     fetch(`/feed?${constructQueryString(params)}`)
       .then(res => res.json())
       .catch(e => console.log(e))
-  )
+  );
 }
 
 export default getFeed;
