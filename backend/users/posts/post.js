@@ -15,7 +15,12 @@ module.exports = {
   createPost: (post, done) => {
     db.get().query('INSERT INTO posts SET ?', [post], (err, result) => {
       if (err) throw err;
-      done(result.insertId);
+      db.get().query(`SELECT postID, dateCreated, title, content 
+                      from posts WHERE postID = ? LIMIT 1`, 
+        [result.insertId], (err, rows, fields) =>{
+          if (err) throw err;
+          done(rows[0]);
+        })
     })
   }
 };

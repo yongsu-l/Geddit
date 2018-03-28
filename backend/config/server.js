@@ -14,6 +14,15 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => res.send('Welcome to Geddit REST API'));
 app.use(cors());
 
+app.all('*', function(req, res, next) {
+       var origin = req.get('origin'); 
+       res.header('Access-Control-Allow-Origin', "http://18.217.251.35:80");
+       res.header("Access-Control-Allow-Headers", "X-Requested-With");
+       res.header('Access-Control-Allow-Headers', 'Content-Type, x-access-token');
+       res.header('Acess-Control-Allow-Methods', 'PUT');
+       next();
+
+});
 //API Routes 
 const user = require('../users');
 const post = require('../posts');
