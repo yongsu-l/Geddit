@@ -16,6 +16,7 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
+    "https": "^1.0.0",
     "jsonwebtoken": "^8.2.0",
     "lodash": "^4.17.5",
     "mysql": "^2.15.0"

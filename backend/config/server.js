@@ -1,11 +1,10 @@
 // app.js
 
-require('./config');
-
 const app         = require('express')();
 const bodyParser  = require('body-parser');
 const colors      = require('colors');
 const db          = require('./db');
+const port        = process.env.PORT || '3001';
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -21,6 +20,6 @@ app.use('/user', user['router']);
 app.use('/post', post['router']);
 app.use('/feed', feed['router']);
 
-app.listen(CONFIG.port, () => {
-  console.log("Server is up and running on port ".green + CONFIG.port.yellow);
+app.listen(port, () => {
+  console.log("Server is up and running on port ".green + port.yellow);
 });
