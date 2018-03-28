@@ -3,7 +3,9 @@ import bg from 'static/bg.jpg';
 
 const AppView = styled.div`
   width: 100vw;
+  min-width: 400px;
   height: 100vh;
+  min-height: 400px;  
   position: relative;
   overflow: hidden;
   transition: width .33s ease, height .33s ease;  

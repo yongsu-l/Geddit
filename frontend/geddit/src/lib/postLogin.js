@@ -1,6 +1,6 @@
 function postLogin(body) {
   return (
-    fetch('http://18.217.251.35:3001/user/login', {
+    fetch('/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
