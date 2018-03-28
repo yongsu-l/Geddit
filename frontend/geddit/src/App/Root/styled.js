@@ -25,7 +25,7 @@ const FeedView = styled.div`
 `
 
 const PostWrapper = styled.div`
-  display: inline-block;
+  display: block;
   width: calc(100% - 268px);
   margin: 12px 6px;
   padding: 6px;

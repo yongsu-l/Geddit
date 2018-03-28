@@ -13,8 +13,9 @@ const PostBG = styled.div`
 `
 
 const PostContainer = styled.div`
+
   background: white;
-  max-width: 720px;
+  max-width: 1080px;
   margin: auto;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -24,7 +25,7 @@ const PostContainer = styled.div`
 const PostView = styled.div`
   position: relative;
   width: calc(100% - 24px);
-  max-width: 720px;
+  max-width: 1080px;
   padding: 6px 12px;
   margin: auto;
 `
@@ -120,7 +121,7 @@ const ControlButton = Button.extend`
 
 const CommentView = styled.div`
   width: calc(100% - 32px);
-  max-width: 720px;  
+  max-width: 1080px;  
   margin: auto;
   padding-bottom: 60px;
   padding-top: 18px;

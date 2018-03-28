@@ -1,6 +1,6 @@
 function putUpvote({ token, postID, upvote }) {
   return (
-    fetch('http://18.217.251.35:3001/post/vote', {
+    fetch('/post/vote', {
       method: 'PUT',
       headers: {
         'x-access-token': token,
